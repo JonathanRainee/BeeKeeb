@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,6 +26,7 @@
                 android:textColor="@color/black" />
 
             <EditText
+                android:id="@+id/etFirstName"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -49,13 +52,14 @@
                 android:textColor="@color/black" />
 
             <EditText
+                android:id="@+id/etLastName"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="23dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/textfield_bg"
                 android:hint="Doe"
-                android:layout_marginEnd="20dp"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
@@ -152,20 +156,22 @@
         android:textColor="@color/black"
         android:textSize="15sp"/>
 
-    <EditText
+    <DatePicker
         android:id="@+id/etBirthdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirthdate"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/textfield_bg"
-        android:hint="30 August 2000"
-        android:inputType="date"
-        android:padding="10dp"/>
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintLeft_toLeftOf="@+id/tvBirthdate"
+        app:layout_constraintRight_toRightOf="@id/tvBirthdate"
+        app:layout_constraintTop_toBottomOf="@+id/tvBirthdate" />
 
     <androidx.appcompat.widget.AppCompatButton
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/btnSignUp"
         app:layout_constraintTop_toBottomOf="@id/etBirthdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

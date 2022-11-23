@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "600993970348",
+    "project_id": "tpa-mobile-jrbw",
+    "storage_bucket": "tpa-mobile-jrbw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600993970348:android:e6c9564d007c0c09498709",
+        "android_client_info": {
+          "package_name": "com.example.beekeeb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600993970348-d1krkh9ctsvme7oardr6fvp3j1e3b174.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beekeeb",
+            "certificate_hash": "59477a1f5f9a0b63c5bf5a7be47e07fb1ca5678a"
+          }
+        },
+        {
+          "client_id": "600993970348-999tdclk1pqhl0a8d90qcnbar18r13v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzDYoV7M4xByGG1uFExx5fjtaeRESiTns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600993970348-999tdclk1pqhl0a8d90qcnbar18r13v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

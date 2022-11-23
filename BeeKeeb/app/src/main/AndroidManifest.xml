@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeKeeb">
         <activity
-            android:name=".loginEmail_activity"
+            android:name=".HomepageActivity"
             android:exported="false" />
         <activity
-            android:name=".Register_activity"
+            android:name=".LoginEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".LoginOption_activity"

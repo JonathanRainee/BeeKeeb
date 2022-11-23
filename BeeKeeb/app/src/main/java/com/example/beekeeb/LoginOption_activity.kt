@@ -13,7 +13,7 @@ class LoginOption_activity : AppCompatActivity() {
         val emailButton = findViewById<Button>(R.id.btnEmail)
 
         emailButton.setOnClickListener(){
-            val intentEmail = Intent(this@LoginOption_activity, loginEmail_activity::class.java)
+            val intentEmail = Intent(this, LoginEmailActivity::class.java)
             startActivity(intentEmail)
         }
     }
