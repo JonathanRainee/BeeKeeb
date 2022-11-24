@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BeeKeeb</string>
+    <string name="tag_prompt">Choose a tag</string>
+
+    <string-array name="tag">
+        <item>Keyboard</item>
+        <item>Switch</item>
+        <item>Keycaps</item>
+        <item>Case</item>
+    </string-array>
 </resources>

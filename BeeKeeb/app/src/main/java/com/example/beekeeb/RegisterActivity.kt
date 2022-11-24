@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import com.example.beekeeb.databinding.ActivityRegisterBinding
+import com.example.beekeeb.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.Serializable
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var signUpBtn: Button
     private lateinit var db: FirebaseFirestore
+    private lateinit var userData: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +56,16 @@ class RegisterActivity : AppCompatActivity() {
                 if(email.endsWith("@gmail.com")){
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener{
                         if(it.isSuccessful){
-                            addUserToDB(user)
-                            val intent = Intent(this, LoginEmailActivity::class.java)
-                            startActivity(intent)
+                            firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{
+                                if(it.isSuccessful){
+                                    userData = User(name, email, phoneNumber, birthdate)
+                                    val intent = Intent(this, HomepageActivity::class.java)
+                                    intent.putExtra("data", userData)
+                                    startActivity(intent)
+                                }else{
+                                    Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         }else{
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         }

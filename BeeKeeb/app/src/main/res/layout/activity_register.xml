@@ -179,7 +179,8 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/login_btn"
-        android:text="Sign In"
+        android:text="Sign Up and Sign In"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp" />
 

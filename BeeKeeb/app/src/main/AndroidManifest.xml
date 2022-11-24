@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeKeeb">
         <activity
+            android:name=".CreatepostActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomepageActivity"
             android:exported="false" />
         <activity
@@ -24,7 +27,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Login">
+            android:theme="@style/Theme.BeeKeeb">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
