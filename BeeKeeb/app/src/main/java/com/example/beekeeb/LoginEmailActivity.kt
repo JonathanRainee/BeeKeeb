@@ -20,6 +20,11 @@ class LoginEmailActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        binding.tvForgotPass.setOnClickListener{
+            val intent = Intent(this, ResetpasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnSignIn.setOnClickListener{
             val email = binding.etEmail.text.toString()
             val pass = binding.etPass.text.toString()
@@ -42,9 +47,9 @@ class LoginEmailActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this, HomepageActivity::class.java)
-            startActivity(intent)
-        }
+//        if(firebaseAuth.currentUser != null){
+//            val intent = Intent(this, HomepageActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

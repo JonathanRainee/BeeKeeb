@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeKeeb">
         <activity
+            android:name=".ResetpasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreatepostActivity"
             android:exported="false" />
         <activity
@@ -19,7 +25,7 @@
             android:name=".LoginEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".UpdateProfileActivity"
             android:exported="false" />
         <activity
             android:name=".LoginOption_activity"
