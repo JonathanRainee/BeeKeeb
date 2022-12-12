@@ -3,6 +3,7 @@ package edu.bluejack22_1.BeeKeeb.frag
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,8 +16,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
+import com.example.beekeeb.MainPageActivity
 import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentAddBinding
+import com.example.beekeeb.model.Post
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,6 +47,9 @@ class AddFragment : Fragment() {
     private lateinit var addbtn: Button
     private lateinit var addImgBtn: Button
     private lateinit var path: Uri
+    private lateinit var bitmap: Bitmap
+    private lateinit var removeBtn: Button
+    private lateinit var newPost: Post
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,12 +65,15 @@ class AddFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(inflater, container, false)
+        removeBtn = binding.removeImgBtn
         addbtn = binding.btnAdd
         imageView = binding.ivImg
         addImgBtn = binding.addImgBtn
+        val currID = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val email = FirebaseAuth.getInstance().currentUser?.email.toString()
 
-        val tag = binding.spinTag.selectedItem.toString()
-
+        val imageChoosen = false
+        removeBtn.visibility = View.GONE
         imageView.visibility = View.GONE
 
         addImgBtn.setOnClickListener{
@@ -70,7 +83,12 @@ class AddFragment : Fragment() {
             Log.d("end", "debug")
         }
 
+        removeBtn.setOnClickListener{
+            removeImg()
+        }
+
         addbtn.setOnClickListener{
+            val tag = binding.spinTag.selectedItem.toString()
             val title = binding.etTitle.text.toString()
             val thread = binding.etThread.text.toString()
             Log.d("start btn", title + " " + thread);
@@ -79,11 +97,14 @@ class AddFragment : Fragment() {
                 Toast.makeText(context, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
 //                Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
             }else{
-                Log.d("else if debugs", "debug elseif")
-                Log.d("post", title)
-                Log.d("post", thread)
-                Log.d("post", tag)
-                Log.d("else if debugs", "debug end")
+                context?.let { it1 ->
+                    Util.uploadImage(email, path, it1){ imageUrl ->
+                        newPost = Post(title, thread, tag, imageUrl)
+                        Util.uploadPost(currID, newPost)
+                        val intent = Intent(it1, MainPageActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
                 Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
             }
 //            Log.d("start btn", "end")
@@ -101,11 +122,18 @@ class AddFragment : Fragment() {
         pickImgFromGallery.launch(intent)
     }
 
+    private fun removeImg(){
+//        path = "".toUri()
+        binding.ivImg.setImageBitmap(null)
+        removeBtn.visibility = View.GONE
+    }
+
     private var pickImgFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null){
             path = result.data!!.data!!
-            var bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, path)
+            bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, path)
 //            imageView.setImageBitmap(bitmap)
+            removeBtn.visibility = View.VISIBLE
             binding.ivImg.visibility =View.VISIBLE
             binding.ivImg.setImageBitmap(bitmap)
             Log.d("imageview", path.toString())
