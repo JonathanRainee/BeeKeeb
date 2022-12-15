@@ -6,12 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
+
     <LinearLayout
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:paddingTop="50dp"
+        android:paddingBottom="50dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/name">
+        tools:layout_editor_absoluteX="0dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -39,6 +43,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/usernameRl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -65,68 +70,16 @@
 
         </RelativeLayout>
 
-
-
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvEmail"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="15dp"
-        android:text="Email"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
-
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/textfield_bg"
-        android:hint="JohnDoe@gmail.com"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/tvPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="15dp"
-        android:text="Password"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
-
-    <EditText
-        android:id="@+id/etPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/textfield_bg"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"/>
-
-    <TextView
         android:id="@+id/tvPhone"
-        app:layout_constraintTop_toBottomOf="@+id/etPass"
+        app:layout_constraintBaseline_toBottomOf="@id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Phone Number"
         android:textColor="@color/black"
         android:textSize="15sp"/>
@@ -158,14 +111,16 @@
 
     <DatePicker
         android:id="@+id/etBirthdate"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_width="365dp"
+        android:layout_height="145dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/textfield_bg"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/tvBirthdate"
         app:layout_constraintRight_toRightOf="@id/tvBirthdate"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBirthdate" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -180,6 +135,22 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/login_btn"
         android:text="Update Profile"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/btnChangePassword"
+        app:layout_constraintTop_toBottomOf="@id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/login_btn"
+        android:text="Change password"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp" />

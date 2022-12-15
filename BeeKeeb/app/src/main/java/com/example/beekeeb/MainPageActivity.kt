@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.beekeeb.databinding.ActivityMainPageBinding
-import edu.bluejack22_1.BeeKeeb.frag.AddFragment
-import edu.bluejack22_1.BeeKeeb.frag.HomeFragment
-import edu.bluejack22_1.BeeKeeb.frag.NewsFragment
-import edu.bluejack22_1.BeeKeeb.frag.ProfileFragment
+import edu.bluejack22_1.BeeKeeb.frag.*
 
 class MainPageActivity : AppCompatActivity() {
 
@@ -24,7 +21,7 @@ class MainPageActivity : AppCompatActivity() {
                 R.id.miHome -> changeFragment(HomeFragment())
                 R.id.miAdd -> changeFragment(AddFragment())
                 R.id.miNews -> changeFragment(NewsFragment())
-                R.id.miProfile -> changeFragment(ProfileFragment())
+                R.id.miProfile -> changeFragment(ProfileUserFragment())
 
                 else ->{
 
