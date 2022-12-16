@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <LinearLayout
@@ -29,6 +30,7 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,16 +40,24 @@
             android:layout_marginBottom="20dp"
             android:textSize="15sp"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/login_btn"
-            android:text="Continue WIth Google"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:background="@drawable/login_btn"/>
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:background="@drawable/login_btn"-->
+<!--            android:text="Continue WIth Google"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="15sp" />-->
 
     </LinearLayout>
 

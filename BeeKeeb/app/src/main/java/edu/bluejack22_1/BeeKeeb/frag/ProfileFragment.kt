@@ -37,7 +37,6 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var updateBtn: AppCompatButton
     private val db = Firebase.firestore
     private val userInstance = FirebaseAuth.getInstance()
 
@@ -48,6 +47,7 @@ class ProfileFragment : Fragment() {
     private lateinit var etLastName: EditText
     private lateinit var etPhone: EditText
     private lateinit var etBirthdate: DatePicker
+    private lateinit var profView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,17 +57,31 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume();
+//        binding.test.setOnClickListener {
+//            Log.d("test", "testing");
+//        }
+        Log.d("test", "resuming");
+        binding.btnChangePassword.setOnClickListener {
+            Log.d("test", "Hello world")
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        profView = inflater.inflate(R.layout.fragment_profile, container, false)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         etFirstName = binding.etFirstName
         etLastName = binding.etLastName
         etPhone = binding.etPhone
         etBirthdate = binding.etBirthdate
-        updateBtn = binding.btnSignUp
-
+        Log.d("test", "set change password listener")
+        binding.btnChangePassword.setOnClickListener {
+            Log.d("test", "Hello world")
+        }
         val reference = db.collection("users").document(userInstance.uid.toString())
         reference.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -94,7 +108,11 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        updateBtn.setOnClickListener{
+
+
+            Log.d("pressed", "set listener")
+        binding.updateBtn.setOnClickListener{
+            Log.d("pressed", "fasdjf")
             val firstname = etFirstName.text.toString()
             val lastname = etLastName.text.toString()
             val username = firstname + " " + lastname
@@ -104,6 +122,7 @@ class ProfileFragment : Fragment() {
             val birthdate = month + "-" + day + "-" + year
             val phone = etPhone.text.toString()
             if(firstname != ""){
+                Log.d("if", "debug if")
                 reference.update(mapOf(
                     "user_name" to username,
                     "user_birthdate" to birthdate,
@@ -114,6 +133,7 @@ class ProfileFragment : Fragment() {
                     Toast.makeText(context, "Failed to update profile!", Toast.LENGTH_SHORT).show()
                 }
             }else{
+                Log.d("else", "debug else")
                 Toast.makeText(context, "Firstname cannot be empty!", Toast.LENGTH_SHORT).show()
             }
 
@@ -121,7 +141,7 @@ class ProfileFragment : Fragment() {
 
 
 
-
+//        return profView
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 

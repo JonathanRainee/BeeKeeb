@@ -47,7 +47,8 @@ class RegisterActivity : AppCompatActivity() {
                             "user_name" to username,
                             "user_phone" to phoneNum,
                             "user_birthdate" to "",
-                            "user_profile_picture" to ""
+                            "user_profile_picture" to "",
+                            "user_about" to ""
                         )
                         db.collection("users").document(uid).set(data)
                             .addOnSuccessListener {

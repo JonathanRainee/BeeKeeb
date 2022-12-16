@@ -33,6 +33,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/settingProfileID"
                 android:src="@drawable/ic_baseline_settings_24"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="logout"
+                android:id="@+id/logoutBtn"/>
         </LinearLayout>
 
     </LinearLayout>

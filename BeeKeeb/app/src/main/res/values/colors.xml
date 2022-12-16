@@ -11,4 +11,5 @@
     <color name="secondary_grey">#797979 </color>
     <color name="accent_grey">#D9D9D9</color>
     <color name="btn_grey">#8C8C8C</color>
+    <color name="cancel_red">#FF0800</color>
 </resources>

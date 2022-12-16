@@ -13,13 +13,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.beekeeb.MainActivity
-import com.example.beekeeb.MainPageActivity
-import com.example.beekeeb.R
+import com.example.beekeeb.*
 import com.example.beekeeb.databinding.FragmentAddBinding
 import com.example.beekeeb.databinding.FragmentProfileUserBinding
 import com.example.beekeeb.model.User
@@ -62,6 +61,7 @@ class ProfileUserFragment : Fragment() {
     private lateinit var usernameTV: TextView
     private lateinit var profileImg: ImageView
     private lateinit var settingIV: ImageView
+    private lateinit var logoutBtn: Button
 
     private lateinit var currUser: User
 
@@ -84,14 +84,28 @@ class ProfileUserFragment : Fragment() {
         profileImg = binding.profileImv
         usernameTV = binding.usernameTv
         settingIV = binding.settingProfileID
+        logoutBtn = binding.logoutBtn
 
         profileImg.setOnClickListener{
             pickImg()
         }
 
-        settingIV.setOnClickListener{
-            changeFragment(ProfileFragment())
+
+        logoutBtn.setOnClickListener{
+            userInstance.signOut()
+            activity?.finish()
+            val intent = Intent(context, LoginEmailActivity::class.java)
+            startActivity(intent)
         }
+
+
+
+        settingIV.setOnClickListener{
+//            changeFragment(ProfileFragment())
+            val intent = Intent(context, UpdateProfileActivity::class.java)
+            startActivity(intent)
+        }
+
 
         reference.addSnapshotListener { snapshot, e ->
             if (e != null) {

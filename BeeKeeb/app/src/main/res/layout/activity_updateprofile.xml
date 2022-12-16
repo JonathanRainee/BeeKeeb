@@ -77,12 +77,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
-        android:text="Email"
+        android:text="About"
         android:textColor="@color/black"
         android:textSize="15sp"/>
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail"
@@ -90,38 +90,13 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/textfield_bg"
-        android:hint="JohnDoe@gmail.com"
         android:inputType="textEmailAddress"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/tvPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="15dp"
-        android:text="Password"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
-
-    <EditText
-        android:id="@+id/etPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/textfield_bg"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="Keeb enthusiast"
         android:padding="10dp"/>
 
     <TextView
         android:id="@+id/tvPhone"
-        app:layout_constraintTop_toBottomOf="@+id/etPass"
+        app:layout_constraintTop_toBottomOf="@+id/etAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -169,17 +144,33 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBirthdate" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/btnSignUp"
         app:layout_constraintTop_toBottomOf="@id/etBirthdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/login_btn"
-        android:text="Sign Up and Sign In"
+        android:text="Update profile"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChangePassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/login_btn"
+        android:text="Change password"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp" />
