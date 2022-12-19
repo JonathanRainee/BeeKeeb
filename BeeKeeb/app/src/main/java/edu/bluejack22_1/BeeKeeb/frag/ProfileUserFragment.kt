@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.icu.number.IntegerWidth
 import android.media.Image
 import android.net.Uri
 import android.os.Bundle
@@ -13,17 +14,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.*
+import com.example.beekeeb.adapter.postAdapter
 import com.example.beekeeb.databinding.FragmentAddBinding
 import com.example.beekeeb.databinding.FragmentProfileUserBinding
+import com.example.beekeeb.model.Post
 import com.example.beekeeb.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -62,8 +66,13 @@ class ProfileUserFragment : Fragment() {
     private lateinit var profileImg: ImageView
     private lateinit var settingIV: ImageView
     private lateinit var logoutBtn: Button
+    private lateinit var postQuery: Query
 
     private lateinit var currUser: User
+
+    private lateinit var postData: ArrayList<Post>
+    private lateinit var adapterPost: postAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +88,30 @@ class ProfileUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileUserBinding.inflate(inflater, container, false)
+
+        postQuery = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
+
+        postData = ArrayList()
+        recyclerView = binding.postRV
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        postQuery.get().addOnSuccessListener { posts ->
+            Log.d("result", "success")
+            for (post in posts){
+                val title = post.get("title").toString()
+                val author = post.get("author").toString()
+                val thread = post.get("thread").toString()
+                val tag = post.get("tag").toString()
+                val path = post.get("thread").toString()
+                val like = Integer.parseInt(post.get("like").toString())
+                Log.d("post", title+" "+thread+" "+tag+" "+path+" "+author+" "+like)
+                postData.add(Post(title, thread, tag, path, author, like))
+            }
+        }
+
+        adapterPost = postAdapter(postData)
+        recyclerView.adapter = adapterPost
 
         val reference = db.collection("users").document(userInstance.uid.toString())
         profileImg = binding.profileImv

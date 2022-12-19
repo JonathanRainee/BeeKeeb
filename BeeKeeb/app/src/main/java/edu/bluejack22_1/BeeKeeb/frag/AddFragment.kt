@@ -43,6 +43,7 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
+    private val userInstance = FirebaseAuth.getInstance()
     private lateinit var imageView: ImageView
     private lateinit var addbtn: Button
     private lateinit var addImgBtn: Button
@@ -99,7 +100,7 @@ class AddFragment : Fragment() {
             }else{
                 context?.let { it1 ->
                     Util.uploadImage(email, path, it1){ imageUrl ->
-                        newPost = Post(title, thread, tag, imageUrl)
+                        newPost = Post(title, thread, tag, imageUrl, currID, 0)
                         Util.uploadPost(currID, newPost)
                         val intent = Intent(it1, MainPageActivity::class.java)
                         startActivity(intent)

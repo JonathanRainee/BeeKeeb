@@ -55,7 +55,7 @@ class ChangePassActivity : AppCompatActivity() {
                 if (newPass != newConfpass){
                     Toast.makeText(this, "Password and confiirmation password doesn't match", Toast.LENGTH_SHORT).show()
 
-                } else if(newPass == oldPass){ 
+                } else if(newPass == oldPass){
                     Toast.makeText(this, "Password can't be the same as the old password", Toast.LENGTH_SHORT).show()
                 }
                 else{

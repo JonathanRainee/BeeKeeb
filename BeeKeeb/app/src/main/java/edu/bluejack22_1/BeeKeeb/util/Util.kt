@@ -28,12 +28,16 @@ class Util {
 
         fun uploadPost(currID: String, post: Post){
             val post = hashMapOf(
+                "author" to currID,
                 "title" to post.title,
                 "thread" to post.thread,
                 "tag" to post.tag,
-                "path" to post.path
+                "path" to post.path,
+                "like" to 0
             )
             val path = "users/"+currID+"/posts"
+            val postPath = "posts"
+            FirebaseFirestore.getInstance().collection(postPath).add(post)
             FirebaseFirestore.getInstance().collection(path).add(post)
         }
     }
