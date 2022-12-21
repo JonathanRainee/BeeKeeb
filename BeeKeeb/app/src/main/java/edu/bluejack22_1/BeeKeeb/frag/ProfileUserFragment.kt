@@ -24,6 +24,7 @@ import com.example.beekeeb.databinding.FragmentAddBinding
 import com.example.beekeeb.databinding.FragmentProfileUserBinding
 import com.example.beekeeb.model.Post
 import com.example.beekeeb.model.User
+import com.example.beekeeb.queries.QueriesUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
@@ -36,6 +37,7 @@ import com.squareup.picasso.Picasso
 import edu.bluejack22_1.BeeKeeb.util.Util
 import java.io.File
 import java.net.URL
+import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,7 +68,6 @@ class ProfileUserFragment : Fragment() {
     private lateinit var profileImg: ImageView
     private lateinit var settingIV: ImageView
     private lateinit var logoutBtn: Button
-    private lateinit var postQuery: Query
 
     private lateinit var currUser: User
 
@@ -89,31 +90,15 @@ class ProfileUserFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileUserBinding.inflate(inflater, container, false)
 
-        postQuery = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
+        val reference = db.collection("users").document(userInstance.uid.toString())
+        val postRef = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
 
-        postData = ArrayList()
         recyclerView = binding.postRV
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        postQuery.get().addOnSuccessListener { posts ->
-            Log.d("result", "success")
-            for (post in posts){
-                val title = post.get("title").toString()
-                val author = post.get("author").toString()
-                val thread = post.get("thread").toString()
-                val tag = post.get("tag").toString()
-                val path = post.get("thread").toString()
-                val like = Integer.parseInt(post.get("like").toString())
-                Log.d("post", title+" "+thread+" "+tag+" "+path+" "+author+" "+like)
-                postData.add(Post(title, thread, tag, path, author, like))
-            }
-        }
+        postData = ArrayList()
 
-        adapterPost = postAdapter(postData)
-        recyclerView.adapter = adapterPost
-
-        val reference = db.collection("users").document(userInstance.uid.toString())
         profileImg = binding.profileImv
         usernameTV = binding.usernameTv
         settingIV = binding.settingProfileID
@@ -162,6 +147,42 @@ class ProfileUserFragment : Fragment() {
             } else {
                 Log.d("snapshot null", "Current data: null")
             }
+        }
+
+        postRef.addSnapshotListener { value, e ->
+            if (e != null) {
+                return@addSnapshotListener
+            }
+
+            val posts = ArrayList<Post>()
+            for (doc in value!!) {
+                val title = doc.get("title").toString();
+                val thread = doc.get("thread").toString();
+                val path = doc.get("path").toString();
+                val like = doc.get("like").toString().toInt();
+                val tag = doc.get("tag").toString();
+                val author = doc.get("author").toString();
+                val docRef = db.collection("users").document(author)
+                docRef.get().addOnSuccessListener { doc ->
+                    if(doc != null){
+                        val username = doc.data?.get("user_name").toString()
+//                        val email = doc.data?.get("user_email").toString()
+//                        val phoneNum = doc.data?.get("user_phone").toString()
+//                        val birthdate = doc.data?.get("user_birthdate").toString()
+                        val profilePic = doc.data?.get("user_profile_picture").toString()
+                        posts.add(Post(title, thread, tag, path, username, profilePic, like));
+                        postData = posts
+                        adapterPost = postAdapter(postData)
+                        recyclerView.adapter = adapterPost
+                    }else {
+                        Log.d("doc not found", "No such document")
+                    }
+                }.addOnFailureListener { e ->
+                    Log.d("Error Get User", e.toString())
+                }
+
+            }
+
         }
 
         return binding.root

@@ -2,6 +2,7 @@ package edu.bluejack22_1.BeeKeeb.util
 
 import android.content.Context
 import android.net.Uri
+import com.example.beekeeb.model.CreatePost
 import com.example.beekeeb.model.Post
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -26,7 +27,7 @@ class Util {
             }
         }
 
-        fun uploadPost(currID: String, post: Post){
+        fun uploadPost(currID: String, post: CreatePost){
             val post = hashMapOf(
                 "author" to currID,
                 "title" to post.title,

@@ -82,6 +82,7 @@ class ProfileFragment : Fragment() {
         binding.btnChangePassword.setOnClickListener {
             Log.d("test", "Hello world")
         }
+
         val reference = db.collection("users").document(userInstance.uid.toString())
         reference.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -138,8 +139,6 @@ class ProfileFragment : Fragment() {
             }
 
         }
-
-
 
 //        return profView
         return inflater.inflate(R.layout.fragment_profile, container, false)

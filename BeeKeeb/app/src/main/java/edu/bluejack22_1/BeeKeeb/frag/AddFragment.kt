@@ -20,6 +20,7 @@ import androidx.core.net.toUri
 import com.example.beekeeb.MainPageActivity
 import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentAddBinding
+import com.example.beekeeb.model.CreatePost
 import com.example.beekeeb.model.Post
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -50,7 +51,7 @@ class AddFragment : Fragment() {
     private lateinit var path: Uri
     private lateinit var bitmap: Bitmap
     private lateinit var removeBtn: Button
-    private lateinit var newPost: Post
+    private lateinit var newPost: CreatePost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +101,7 @@ class AddFragment : Fragment() {
             }else{
                 context?.let { it1 ->
                     Util.uploadImage(email, path, it1){ imageUrl ->
-                        newPost = Post(title, thread, tag, imageUrl, currID, 0)
+                        newPost = CreatePost(title, thread, tag, imageUrl, currID, 0)
                         Util.uploadPost(currID, newPost)
                         val intent = Intent(it1, MainPageActivity::class.java)
                         startActivity(intent)
