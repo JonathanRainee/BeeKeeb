@@ -10,4 +10,12 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    toast-->
+    <!--    post-->
+    <string name="delFailed">Delete failed, please try again later</string>
+    <string name="delSuccess">Delete success</string>
+
+<!--    comment-->
+    <string name="inpComment">Input comment...</string>
 </resources>

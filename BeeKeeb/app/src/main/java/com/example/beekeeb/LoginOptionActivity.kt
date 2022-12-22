@@ -110,6 +110,7 @@ class LoginOptionActivity : AppCompatActivity() {
                 )
 
                 db.collection("users").document(uid).set(data).addOnSuccessListener {
+                    this.finish()
                     val intent = Intent(this, MainPageActivity::class.java)
                     startActivity(intent)
                 }.addOnFailureListener{

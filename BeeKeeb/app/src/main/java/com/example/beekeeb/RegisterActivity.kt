@@ -52,6 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                         )
                         db.collection("users").document(uid).set(data)
                             .addOnSuccessListener {
+                                this.finish()
                                 val intent = Intent(this, LoginEmailActivity::class.java)
                                 startActivity(intent)
                             }

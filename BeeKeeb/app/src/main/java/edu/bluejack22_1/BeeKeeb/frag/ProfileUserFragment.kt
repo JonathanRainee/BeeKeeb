@@ -25,6 +25,9 @@ import com.example.beekeeb.databinding.FragmentProfileUserBinding
 import com.example.beekeeb.model.Post
 import com.example.beekeeb.model.User
 import com.example.beekeeb.queries.QueriesUser
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
@@ -75,6 +78,8 @@ class ProfileUserFragment : Fragment() {
     private lateinit var adapterPost: postAdapter
     private lateinit var recyclerView: RecyclerView
 
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -90,6 +95,10 @@ class ProfileUserFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileUserBinding.inflate(inflater, container, false)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail().build()
+        mGoogleSignInClient= context?.let { GoogleSignIn.getClient(it,gso) }!!
         val reference = db.collection("users").document(userInstance.uid.toString())
         val postRef = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
 
@@ -111,6 +120,7 @@ class ProfileUserFragment : Fragment() {
 
         logoutBtn.setOnClickListener{
             userInstance.signOut()
+            mGoogleSignInClient.signOut()
             activity?.finish()
             val intent = Intent(context, LoginEmailActivity::class.java)
             startActivity(intent)
@@ -162,6 +172,7 @@ class ProfileUserFragment : Fragment() {
                 val like = doc.get("like").toString().toInt();
                 val tag = doc.get("tag").toString();
                 val author = doc.get("author").toString();
+                val uid = doc.get("uid").toString()
                 val docRef = db.collection("users").document(author)
                 docRef.get().addOnSuccessListener { doc ->
                     if(doc != null){
@@ -170,10 +181,17 @@ class ProfileUserFragment : Fragment() {
 //                        val phoneNum = doc.data?.get("user_phone").toString()
 //                        val birthdate = doc.data?.get("user_birthdate").toString()
                         val profilePic = doc.data?.get("user_profile_picture").toString()
-                        posts.add(Post(title, thread, tag, path, username, profilePic, like));
+                        posts.add(Post(title, thread, tag, path, username, profilePic, like, uid));
                         postData = posts
                         adapterPost = postAdapter(postData)
                         recyclerView.adapter = adapterPost
+                        adapterPost.onItemClicked = {
+                            val intent = Intent(context, PostDetailActivity::class.java)
+                            intent.putExtra("uid", uid)
+                            intent.putExtra("authorUID", author)
+                            intent.putExtra("post", Post(title, thread, tag, path, username, profilePic, like, uid))
+                            startActivity(intent)
+                        }
                     }else {
                         Log.d("doc not found", "No such document")
                     }

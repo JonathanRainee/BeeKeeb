@@ -5,6 +5,7 @@ import android.net.Uri
 import com.example.beekeeb.model.CreatePost
 import com.example.beekeeb.model.Post
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 class Util {
@@ -38,8 +39,18 @@ class Util {
             )
             val path = "users/"+currID+"/posts"
             val postPath = "posts"
-            FirebaseFirestore.getInstance().collection(postPath).add(post)
-            FirebaseFirestore.getInstance().collection(path).add(post)
+            FirebaseFirestore.getInstance().collection(postPath).add(post).addOnSuccessListener {
+                var id = it.id.toString()
+                FirebaseFirestore.getInstance().collection("posts").document(id).update(mapOf(
+                    "uid" to id
+                ))
+            }
+            FirebaseFirestore.getInstance().collection(path).add(post).addOnSuccessListener {
+                var id = it.id.toString()
+                FirebaseFirestore.getInstance().collection(path).document(id).update(mapOf(
+                    "uid" to id
+                ))
+            }
         }
     }
 

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeKeeb">
         <activity
+            android:name=".CommentSectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChangePassActivity"
             android:exported="false" />
         <activity

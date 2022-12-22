@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 class postAdapter (private val postList: ArrayList<Post>): RecyclerView.Adapter<postAdapter.PostViewHolder>() {
 
     private lateinit var binding: PostCardBinding
+    var onItemClicked: ((Post) -> Unit)? = null
 
     class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val profileImageView: ImageView = itemView.findViewById(R.id.profileIV)
@@ -37,6 +38,10 @@ class postAdapter (private val postList: ArrayList<Post>): RecyclerView.Adapter<
         holder.titleTextView.text = post.title
         holder.threadTextView.text = post.thread
         Picasso.get().load(post.path).fit().centerCrop().into(holder.mediaImageView)
+
+        holder.itemView.setOnClickListener{
+            onItemClicked?.invoke(post)
+        }
     }
 
     override fun getItemCount(): Int {
