@@ -1,7 +1,6 @@
 package edu.bluejack22_1.BeeKeeb.frag
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -16,14 +15,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
 import com.example.beekeeb.MainPageActivity
-import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentAddBinding
 import com.example.beekeeb.model.CreatePost
-import com.example.beekeeb.model.Post
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,6 +49,7 @@ class AddFragment : Fragment() {
     private lateinit var bitmap: Bitmap
     private lateinit var removeBtn: Button
     private lateinit var newPost: CreatePost
+    private lateinit var currUser: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +69,7 @@ class AddFragment : Fragment() {
         addbtn = binding.btnAdd
         imageView = binding.ivImg
         addImgBtn = binding.addImgBtn
+        currUser = FirebaseAuth.getInstance().currentUser!!
         val currID = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val email = FirebaseAuth.getInstance().currentUser?.email.toString()
 
@@ -88,11 +87,14 @@ class AddFragment : Fragment() {
         removeBtn.setOnClickListener{
             removeImg()
         }
+        val array = arrayOf(currUser.uid.toString())
 
         addbtn.setOnClickListener{
             val tag = binding.spinTag.selectedItem.toString()
             val title = binding.etTitle.text.toString()
             val thread = binding.etThread.text.toString()
+            val array = listOf("")
+            val liked = mapOf("arrayField" to FieldValue.arrayUnion(array))
             Log.d("start btn", title + " " + thread);
             if(title.isEmpty() || thread.isEmpty()){
                 Log.d("if debugs", "debug if")
@@ -101,7 +103,7 @@ class AddFragment : Fragment() {
             }else{
                 context?.let { it1 ->
                     Util.uploadImage(email, path, it1){ imageUrl ->
-                        newPost = CreatePost(title, thread, tag, imageUrl, currID, 0, "")
+                        newPost = CreatePost(title, thread, tag, imageUrl, currID, 0, "", array)
                         Util.uploadPost(currID, newPost)
                         activity?.fragmentManager?.popBackStack()
                         val intent = Intent(it1, MainPageActivity::class.java)

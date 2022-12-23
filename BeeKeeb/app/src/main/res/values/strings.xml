@@ -12,10 +12,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--    toast-->
+    <!--    all-->
+    <string name="dbError">An error has occurred, please try again later</string>
+
     <!--    post-->
     <string name="delFailed">Delete failed, please try again later</string>
     <string name="delSuccess">Delete success</string>
 
-<!--    comment-->
+    <!--    comment-->
     <string name="inpComment">Input comment...</string>
+    <string name="invalidQ">Question can\'t be empty</string>
+    <string name="successQ">New Question added</string>
 </resources>

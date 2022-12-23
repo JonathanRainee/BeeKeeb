@@ -29,13 +29,15 @@ class Util {
         }
 
         fun uploadPost(currID: String, post: CreatePost){
+            val likedBy = listOf("")
             val post = hashMapOf(
                 "author" to currID,
                 "title" to post.title,
                 "thread" to post.thread,
                 "tag" to post.tag,
                 "path" to post.path,
-                "like" to 0
+                "like" to 0,
+                "likedBy" to likedBy
             )
             val path = "users/"+currID+"/posts"
             val postPath = "posts"

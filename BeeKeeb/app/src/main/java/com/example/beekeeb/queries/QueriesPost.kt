@@ -2,9 +2,7 @@ package com.example.beekeeb.queries
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.example.beekeeb.model.CreatePost
-import com.example.beekeeb.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -12,8 +10,9 @@ class QueriesPost {
 
     companion object{
         fun getPost(postID: String): CreatePost{
+            val list = listOf("")
             val db = Firebase.firestore
-            var post = CreatePost("", "", "", "", "", 0, "")
+            var post = CreatePost("", "", "", "", "", 0, "", list)
             val docref = db.collection("posts").document(postID)
             docref.get().addOnSuccessListener { doc ->
                 if(doc != null){
@@ -24,8 +23,9 @@ class QueriesPost {
                     val authorID = doc.data?.get("author").toString()
                     val like = doc.data?.get("like").toString().toInt()
                     val uid = doc.data?.get("uid").toString()
+                    val liked = doc.data?.get("likedBy") as List<String>
                     Log.d("query", title+" "+thread+" "+tag+" "+path+" "+authorID+" "+like+" "+uid)
-                    post = CreatePost(title, thread, tag, path, authorID, like, uid)
+                    post = CreatePost(title, thread, tag, path, authorID, like, uid, liked)
                 }
             }
             Log.d("query", post.title+" "+post.thread+" "+post.tag+" "+post.path+" "+post.author+" "+post.like+" "+post.uid)
