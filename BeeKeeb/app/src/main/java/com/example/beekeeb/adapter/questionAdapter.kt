@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.R
 import com.example.beekeeb.model.Question
+import com.squareup.picasso.Picasso
 
 class questionAdapter (private val questionList: ArrayList<Question>): RecyclerView.Adapter<questionAdapter.QuestionViewHolder>() {
 
@@ -29,7 +30,7 @@ class questionAdapter (private val questionList: ArrayList<Question>): RecyclerV
         val question = questionList[position]
         holder.questionTextView.text = question.question
         holder.authorTextView.text = question.authorName
-//        holder.profileImageView.image set profile image author queastion
+        Picasso.get().load(question.authorPicture).fit().centerCrop().into(holder.profileImageView)
 
         holder.replyImageView.setOnClickListener{
             onItemClicked?.invoke(question)

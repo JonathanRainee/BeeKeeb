@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FieldValue.arrayUnion
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 class PostDetailActivity : AppCompatActivity() {
 
@@ -55,7 +56,8 @@ class PostDetailActivity : AppCompatActivity() {
         userDocRef.get().addOnSuccessListener { doc ->
             if(doc != null){
                 AuthorName = doc.data?.get("user_name").toString()
-//                AuthorProfPic = doc.data?.get("user_profile_picture").toString()
+                AuthorProfPic = doc.data?.get("user_profile_picture").toString()
+                Picasso.get().load(AuthorProfPic).fit().centerCrop().into(binding.profileIV)
                 binding.authorTV.setText(AuthorName)
             }
         }
@@ -72,10 +74,12 @@ class PostDetailActivity : AppCompatActivity() {
                 uid = doc.data?.get("uid").toString()
                 LikedBy = doc.data?.get("likedBy") as List<String>
                 FinalLike = LikedBy.toList()
-//                Log.d("query", title+" "+thread+" "+tag+" "+path+" "+authorID+" "+like+" "+uid+" "+LikedBy)
+                val path = doc.data?.get("path").toString()
                 post = CreatePost(title, thread, tag, path, authorID, like.toInt(), uid, FinalLike)
                 binding.titleTV.setText(title)
                 binding.threadTV.setText(thread)
+                Picasso.get().load(path).into(binding.mediaIV)
+
                 for (i in FinalLike){
                     Log.d("liked", i)
                 }

@@ -1,12 +1,20 @@
 package com.example.beekeeb
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.beekeeb.adapter.postAdapter
+import com.example.beekeeb.adapter.questionAdapter
 import com.example.beekeeb.databinding.ActivityCommentSectionBinding
+import com.example.beekeeb.model.Post
+import com.example.beekeeb.model.Question
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,6 +25,9 @@ class CommentSectionActivity : AppCompatActivity() {
     private lateinit var postUID: String
     private lateinit var db: FirebaseFirestore
     private lateinit var currUser: FirebaseUser
+    private lateinit var questionsList: ArrayList<Question>
+    private lateinit var adapterQuestions: questionAdapter
+    private lateinit var  recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCommentSectionBinding.inflate(layoutInflater)
@@ -28,6 +39,43 @@ class CommentSectionActivity : AppCompatActivity() {
         var error = getString(R.string.invalidQ)
         var success = getString(R.string.successQ)
         var dbError = getString(R.string.dbError)
+
+        recyclerView = binding.questionRV
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        questionsList = ArrayList()
+
+        var questionDocRef = db.collection("posts").document(postUID).collection("questions")
+
+        questionDocRef.addSnapshotListener { value, e ->
+            if (e != null) {
+                return@addSnapshotListener
+            }
+
+            val questions = ArrayList<Question>()
+            for (doc in value!!) {
+                val sender = doc.data.get("sender").toString()
+                val question = doc.data.get("question").toString()
+                val userRef = db.collection("users").document(sender)
+                val questionId = doc.id
+                userRef.get().addOnSuccessListener { doc ->
+                    if (doc != null) {
+                        val username = doc.data?.get("user_name").toString()
+                        val profilePic = doc.data?.get("user_profile_picture").toString()
+                        questions.add(Question(question, questionId, username, profilePic))
+                        questionsList = questions
+                        adapterQuestions = questionAdapter(questionsList)
+                        recyclerView.adapter = adapterQuestions
+                        Log.d("authorname", username)
+                        Log.d("question", question)
+                    }
+                }
+            }
+        }
+
+
+
 
         binding.sendBtn.setOnClickListener{
             var question = binding.etComment.text.toString()
@@ -54,6 +102,8 @@ class CommentSectionActivity : AppCompatActivity() {
                 }
             }
         }
+
+
         setContentView(binding.root)
     }
 
