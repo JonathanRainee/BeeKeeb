@@ -77,6 +77,7 @@ class ProfileUserFragment : Fragment() {
     private lateinit var postData: ArrayList<Post>
     private lateinit var adapterPost: postAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var postID: String
 
     lateinit var mGoogleSignInClient: GoogleSignInClient
 
@@ -176,6 +177,8 @@ class ProfileUserFragment : Fragment() {
                 val docRef = db.collection("users").document(author)
                 docRef.get().addOnSuccessListener { doc ->
                     if(doc != null){
+
+
                         val username = doc.data?.get("user_name").toString()
 //                        val email = doc.data?.get("user_email").toString()
 //                        val phoneNum = doc.data?.get("user_phone").toString()
@@ -186,10 +189,11 @@ class ProfileUserFragment : Fragment() {
                         adapterPost = postAdapter(postData)
                         recyclerView.adapter = adapterPost
                         adapterPost.onItemClicked = {
+                            postID = uid
+                            Log.d("hehe", postID)
                             val intent = Intent(context, PostDetailActivity::class.java)
                             intent.putExtra("uid", uid)
                             intent.putExtra("authorUID", author)
-                            intent.putExtra("post", Post(title, thread, tag, path, username, profilePic, like, uid))
                             startActivity(intent)
                         }
                     }else {

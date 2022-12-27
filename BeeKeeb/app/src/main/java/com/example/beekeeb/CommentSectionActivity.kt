@@ -67,6 +67,12 @@ class CommentSectionActivity : AppCompatActivity() {
                         questionsList = questions
                         adapterQuestions = questionAdapter(questionsList)
                         recyclerView.adapter = adapterQuestions
+                        adapterQuestions.onItemClicked = {
+                            val intent = Intent(this, AnswerActivity::class.java)
+                            intent.putExtra("postUID", postUID)
+                            intent.putExtra("questionUID", questionId)
+                            startActivity(intent)
+                        }
                         Log.d("authorname", username)
                         Log.d("question", question)
                     }
