@@ -53,7 +53,6 @@ class CommentSectionActivity : AppCompatActivity() {
                 return@addSnapshotListener
             }
 
-            val questions = ArrayList<Question>()
             for (doc in value!!) {
                 val sender = doc.data.get("sender").toString()
                 val question = doc.data.get("question").toString()
@@ -63,18 +62,15 @@ class CommentSectionActivity : AppCompatActivity() {
                     if (doc != null) {
                         val username = doc.data?.get("user_name").toString()
                         val profilePic = doc.data?.get("user_profile_picture").toString()
-                        questions.add(Question(question, questionId, username, profilePic))
-                        questionsList = questions
+                        questionsList.add(Question(question, questionId, username, profilePic))
                         adapterQuestions = questionAdapter(questionsList)
                         recyclerView.adapter = adapterQuestions
                         adapterQuestions.onItemClicked = {
                             val intent = Intent(this, AnswerActivity::class.java)
                             intent.putExtra("postUID", postUID)
-                            intent.putExtra("questionUID", questionId)
+                            intent.putExtra("questionUID", it.uid)
                             startActivity(intent)
                         }
-                        Log.d("authorname", username)
-                        Log.d("question", question)
                     }
                 }
             }

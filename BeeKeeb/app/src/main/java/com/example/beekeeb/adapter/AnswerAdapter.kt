@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.R
 import com.example.beekeeb.model.Answer
+import com.squareup.picasso.Picasso
 
 class AnswerAdapter (private val answerList: ArrayList<Answer>): RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder>(){
 
@@ -26,6 +27,7 @@ class AnswerAdapter (private val answerList: ArrayList<Answer>): RecyclerView.Ad
         val answer = answerList[position]
         holder.authorTextView.text = answer.authorName
         holder.answerTextView.text = answer.answer
+        Picasso.get().load(answer.authorPicture).fit().centerCrop().into(holder.profileImageView)
     }
 
     override fun getItemCount(): Int {

@@ -11,6 +11,7 @@ import com.example.beekeeb.model.Answer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 
 class AnswerActivity : AppCompatActivity() {
 
@@ -55,8 +56,9 @@ class AnswerActivity : AppCompatActivity() {
                 senderRef.get().addOnSuccessListener { doc ->
                     if(doc != null){
                         val username = doc.data?.get("user_name").toString()
-                        val profile_picture = doc.data?.get("user_profile_picture")
+                        val profile_picture = doc.data?.get("user_profile_picture").toString()
                         binding.authorTV.text = username
+                        Picasso.get().load(profile_picture).fit().centerCrop().into(binding.profileIV)
                     }
                 }
             }
