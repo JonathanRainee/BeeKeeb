@@ -1,11 +1,22 @@
 package edu.bluejack22_1.BeeKeeb.frag
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.beekeeb.PostDetailActivity
 import com.example.beekeeb.R
+import com.example.beekeeb.adapter.postAdapter
+import com.example.beekeeb.databinding.FragmentPostsearchBinding
+import com.example.beekeeb.model.Post
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +33,14 @@ class PostsearchFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var _binding: FragmentPostsearchBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var db: FirebaseFirestore
+
+    private lateinit var postData: ArrayList<Post>
+    private lateinit var adapterPost: postAdapter
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,8 +54,121 @@ class PostsearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_postsearch, container, false)
+        _binding = FragmentPostsearchBinding.inflate(inflater, container, false)
+        db = FirebaseFirestore.getInstance()
+
+        recyclerView = binding.postRV
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        postData = ArrayList()
+
+        binding.spinTag.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                postData.clear()
+                val item = parent?.getItemAtPosition(position) as String
+                val path = db.collection("posts").orderBy("tag").startAt(item).endAt(item+"\uf8ff")
+                val docs = path.get()
+                docs.addOnSuccessListener { docs ->
+                    for (doc in docs){
+                        val title = doc.get("title").toString();
+                        val thread = doc.get("thread").toString();
+                        val path = doc.get("path").toString();
+                        val like = doc.get("like").toString().toInt();
+                        val tag = doc.get("tag").toString();
+                        val author = doc.get("author").toString();
+                        val uid = doc.get("uid").toString()
+                        val docRef = db.collection("users").document(author)
+                        docRef.get().addOnSuccessListener { doc ->
+                            if (doc != null){
+                                val authorID = doc.id
+                                val username = doc.data?.get("user_name").toString()
+                                val profilePic = doc.data?.get("user_profile_picture").toString()
+                                Log.d("ini post", title+" "+thread+" "+tag+" "+author+" "+username)
+                                postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
+                                adapterPost = postAdapter(postData)
+                                recyclerView.adapter = adapterPost
+                                adapterPost.onItemClicked = {
+                                    val intent = Intent(context, PostDetailActivity::class.java)
+                                    intent.putExtra("uid", it.uid)
+                                    intent.putExtra("authorUID", it.authorUID)
+                                    startActivity(intent)
+                                }
+                            }else{
+                                Log.d("doc not found", "No such document")
+                            }
+                        }.addOnFailureListener{ e ->
+                            Log.d("Error Get User", e.toString())
+                        }
+                    }
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        binding.sendBtn.setOnClickListener{
+            Log.d("search", "search")
+            postData.clear()
+            var keyword = binding.etKeyword.text.toString()
+            val regex = Regex("^"+keyword+".*")
+            Log.d("keyword", keyword)
+//            val path = db.collection("posts").where(FieldPath.of("user_name"), "==", regex)
+
+            val path2 = db.collection("posts").orderBy("title").startAt(keyword).endAt(keyword+"\uf8ff")
+
+            val docs = path2.get()
+            docs.addOnSuccessListener { docs ->
+                for (doc in docs){
+                    val title = doc.get("title").toString();
+                    val thread = doc.get("thread").toString();
+                    val path = doc.get("path").toString();
+                    val like = doc.get("like").toString().toInt();
+                    val tag = doc.get("tag").toString();
+                    val author = doc.get("author").toString();
+                    val uid = doc.get("uid").toString()
+                    val docRef = db.collection("users").document(author)
+                    docRef.get().addOnSuccessListener { doc ->
+                        if (doc != null){
+                            val authorID = doc.id
+                            val username = doc.data?.get("user_name").toString()
+                            val profilePic = doc.data?.get("user_profile_picture").toString()
+                            Log.d("ini post", title+" "+thread+" "+tag+" "+author+" "+username)
+                            postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
+                            adapterPost = postAdapter(postData)
+                            recyclerView.adapter = adapterPost
+                            adapterPost.onItemClicked = {
+                                val intent = Intent(context, PostDetailActivity::class.java)
+                                intent.putExtra("uid", it.uid)
+                                intent.putExtra("authorUID", it.authorUID)
+                                startActivity(intent)
+                            }
+                        }else{
+                            Log.d("doc not found", "No such document")
+                        }
+                    }.addOnFailureListener{ e ->
+                        Log.d("Error Get User", e.toString())
+                    }
+                }
+            }
+
+        }
+
+
+
+//        return inflater.inflate(R.layout.fragment_postsearch, container, false)
+        return binding.root
     }
+
 
     companion object {
         /**

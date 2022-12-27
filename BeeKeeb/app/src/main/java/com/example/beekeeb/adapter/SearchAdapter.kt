@@ -1,5 +1,6 @@
 package com.example.beekeeb.adapter
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -12,6 +13,7 @@ class SearchAdapter(fragmentManager: FragmentManager, lifeCycle: Lifecycle) : Fr
     override fun getItemCount(): Int {
         return 2
     }
+
 
     override fun createFragment(position: Int): Fragment {
         when(position){

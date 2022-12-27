@@ -4,17 +4,60 @@
     android:layout_height="match_parent"
     tools:context="edu.bluejack22_1.BeeKeeb.frag.PostsearchFragment">
 
-    <Spinner
-        android:id="@+id/spinTag"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/tag"
-        android:padding="5dp"
-        android:prompt="@string/tag_prompt"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/textfield_bg"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etKeyword"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:hint= "@string/inpSearch"
+                android:background="@drawable/textfield_bg"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <Button
+                android:id="@+id/sendBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:background="@drawable/textfield_bg"
+                android:layout_marginVertical="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="5dp"
+                android:layout_marginRight="8dp"/>
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/tag"
+            android:padding="5dp"
+            android:prompt="@string/tag_prompt"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/textfield_bg"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+
 
 </FrameLayout>

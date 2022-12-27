@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.beekeeb.MainPageActivity
 import com.example.beekeeb.R
+import com.example.beekeeb.SearchActivity
 import com.example.beekeeb.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -47,7 +48,8 @@ class HomeFragment : Fragment() {
 
 
         binding.searchFAB.setOnClickListener{
-
+            val intent = Intent(context, SearchActivity::class.java)
+            startActivity(intent)
         }
 
 //        return inflater.inflate(R.layout.fragment_home, container, false)

@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.widget.TableLayout
 import com.example.beekeeb.adapter.SearchAdapter
 import com.example.beekeeb.databinding.ActivitySearchBinding
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    var tableTitle = arrayOf(R.string.user, R.string.post)
+//    var user = getString(R.string.user)
+//    var post = getString(R.string.post)
+//    var tableTitle = arrayOf(user, post)
+
+    var tableTitle = arrayOf("Post", "User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -22,7 +27,10 @@ class SearchActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, pager){
             tab, position ->
-                tab.text = tableTitle[position].toString()
+                tab.text = when(position){
+                    0 -> getString(R.string.post)
+                    else -> getString(R.string.user)
+                }
         }.attach()
 
         super.onCreate(savedInstanceState)

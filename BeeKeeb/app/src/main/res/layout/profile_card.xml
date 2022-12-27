@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textfield_bg">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profileIV"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:circularflow_radiusInDP="10dp"
+            android:src="@drawable/logo1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/authorTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="author"
+            android:textSize="24dp"
+            android:paddingTop="3dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintStart_toEndOf="@id/profileIV"
+            app:layout_constraintTop_toTopOf="@id/profileIV"/>
+
+        <TextView
+            android:id="@+id/aboutTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iniii abouttttttttttttttt"
+            android:textSize="15dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintStart_toEndOf="@id/profileIV"
+            app:layout_constraintTop_toBottomOf="@id/authorTV"
+            app:layout_constraintBottom_toBottomOf= "parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

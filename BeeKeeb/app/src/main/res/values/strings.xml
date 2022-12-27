@@ -20,18 +20,18 @@
     <string name="delSuccess">Delete success</string>
 
     <!--    comment-->
-    <string name="inpComment">Input comment...</string>
+    <string name="inpComment">Input comment…</string>
     <string name="invalidQ">Question can\'t be empty</string>
     <string name="successQ">New Question added</string>
 
     <!--    answer-->
-    <string name="inpAnswer">Input answer...</string>
+    <string name="inpAnswer">Input answer…</string>
     <string name="invalidAns">Answer can\'t be empty</string>
     <string name="successAns">New Answer added</string>
 
 
     <!--    search-->
-    <string name="inpSearch">Input keyword...</string>
+    <string name="inpSearch">Input keyword…</string>
     <string name="post">Post</string>
     <string name="user">User</string>
 </resources>
