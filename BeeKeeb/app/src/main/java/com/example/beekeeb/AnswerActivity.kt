@@ -43,10 +43,11 @@ class AnswerActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         answerList = ArrayList()
-
+        answerList.clear()
         questionRef.get().addOnSuccessListener { doc ->
             if (doc != null){
                 val question = doc.data?.get("question").toString()
+
                 val sender = doc.data?.get("sender").toString()
 
                 binding.questionTV.text = question

@@ -48,6 +48,7 @@ class ProfileFragment : Fragment() {
     private lateinit var etPhone: EditText
     private lateinit var etBirthdate: DatePicker
     private lateinit var profView: View
+    private lateinit var following: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +97,9 @@ class ProfileFragment : Fragment() {
                     val phoneNum = snapshot.data?.get("user_phone").toString()
                     val birthdate = snapshot.data?.get("user_birthdate").toString()
                     val profilePic = snapshot.data?.get("user_profile_picture").toString()
-                    currUser = User(username, email, phoneNum, birthdate, profilePic)
+                    following = snapshot.data?.get("following") as List<String>
+                    val about = snapshot.data?.get("user_about").toString()
+                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following)
                     usernameParts = currUser.username.split(" ")
                     Log.d("firstname", usernameParts[0])
                     Log.d("lastname", usernameParts[0])

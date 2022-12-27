@@ -8,7 +8,8 @@ class QueriesUser {
     companion object{
         fun getUser(userID: String): User {
             val db = Firebase.firestore
-            var user = User("","","","","");
+            val following = listOf("")
+            var user = User("","","","","", "", following);
             val docRef = db.collection("users").document(userID)
             docRef.get().addOnSuccessListener { doc ->
                 if(doc != null){
@@ -17,7 +18,9 @@ class QueriesUser {
                     val phoneNum = doc.data?.get("user_phone").toString()
                     val birthdate = doc.data?.get("user_birthdate").toString()
                     val profilePic = doc.data?.get("user_profile_picture").toString()
-                    user = User(username,email,phoneNum,birthdate,profilePic);
+                    val about = doc.data?.get("user_about").toString()
+                    val following = doc.data?.get("following") as List<String>
+                    user = User(username,about,email,phoneNum,birthdate,profilePic, following);
                 }
             }
             return user;
@@ -25,7 +28,8 @@ class QueriesUser {
 
         fun getPostAuthor(authorID: String): User {
             val db = Firebase.firestore
-            var user = User("","","","","");
+            val following = listOf("")
+            var user = User("","","","","", "", following);
             val docRef = db.collection("users").document(authorID)
             docRef.get().addOnSuccessListener { doc ->
                 if(doc != null){
@@ -34,7 +38,9 @@ class QueriesUser {
                     val phoneNum = doc.data?.get("user_phone").toString()
                     val birthdate = doc.data?.get("user_birthdate").toString()
                     val profilePic = doc.data?.get("user_profile_picture").toString()
-                    user = User(username,email,phoneNum,birthdate,profilePic);
+                    val about = doc.data?.get("user_about").toString()
+                    val following = doc.data?.get("following") as List<String>
+                    user = User(username,about,email,phoneNum,birthdate,profilePic, following);
                 }
             }
             return user;

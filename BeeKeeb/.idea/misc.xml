@@ -33,6 +33,7 @@
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/drawable/style.xml" value="0.2445" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/drawable/textfield_bg.xml" value="0.225" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/acitivity_loginoption.xml" value="0.15" />
+        <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/activity_another_profile.xml" value="0.33" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/activity_answer.xml" value="0.33" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/activity_change_pass.xml" value="0.30104166666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/activity_comment_section.xml" value="0.22037037037037038" />
@@ -52,7 +53,7 @@
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_postsearch.xml" value="0.33" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile_user.xml" value="0.21770833333333334" />
-        <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_usersearch.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_usersearch.xml" value="0.1" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/home_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/loginoption_layout.xml" value="0.25" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/post_card.xml" value="0.1" />

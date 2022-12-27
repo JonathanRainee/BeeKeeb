@@ -15,7 +15,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/etComment"
+                android:id="@+id/etSearch"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
                 android:hint= "@string/inpSearch"
@@ -27,7 +27,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <Button
-                android:id="@+id/sendBtn"
+                android:id="@+id/searchBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:drawableStart="@drawable/ic_baseline_search_24"
@@ -37,6 +37,11 @@
                 android:paddingRight="5dp"
                 android:layout_marginRight="8dp"/>
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profileRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
 </FrameLayout>

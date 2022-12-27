@@ -1,11 +1,19 @@
 package edu.bluejack22_1.BeeKeeb.frag
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.beekeeb.AnotherProfileActivity
 import com.example.beekeeb.R
+import com.example.beekeeb.adapter.ProfileAdapter
+import com.example.beekeeb.databinding.FragmentUsersearchBinding
+import com.example.beekeeb.model.User
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +30,14 @@ class UsersearchFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var _binding: FragmentUsersearchBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var db: FirebaseFirestore
+
+    private lateinit var profileData: ArrayList<User>
+    private lateinit var adapterProfile: ProfileAdapter
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,8 +51,47 @@ class UsersearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_usersearch, container, false)
+        _binding = FragmentUsersearchBinding.inflate(inflater, container, false)
+        db = FirebaseFirestore.getInstance()
+
+        recyclerView = binding.profileRV
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        profileData = ArrayList()
+
+        binding.searchBtn.setOnClickListener{
+            profileData.clear()
+            var keyword = binding.etSearch.text.toString()
+            val path = db.collection("users").orderBy("user_name").startAt(keyword).endAt(keyword+"\uf8ff")
+
+            val docs = path.get()
+            docs.addOnSuccessListener { docs ->
+                for(doc in docs){
+                    val username = doc.get("user_name").toString()
+                    val about = doc.get("user_about").toString()
+                    val email = doc.get("user_email").toString()
+                    val phone = doc.get("user_phone").toString()
+                    val birthdate = doc.get("user_birthdate").toString()
+                    val following = doc.get("following") as List<String>
+                    val uid = doc.id
+                    val profilePic = doc.get("user_profile_picture").toString()
+                    profileData.add(User(username, about, email, phone, birthdate, profilePic, following))
+                    adapterProfile = ProfileAdapter(profileData)
+                    recyclerView.adapter = adapterProfile
+                    adapterProfile.onItemClicked = {
+                        val intent = Intent(context, AnotherProfileActivity::class.java)
+                        intent.putExtra("profileUID", doc.id)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
+//        return inflater.inflate(R.layout.fragment_usersearch, container, false)
+        return binding.root
     }
+
 
     companion object {
         /**

@@ -34,4 +34,8 @@
     <string name="inpSearch">Input keyword…</string>
     <string name="post">Post</string>
     <string name="user">User</string>
+
+    <!--    profile-->
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
 </resources>

@@ -45,6 +45,7 @@ class CommentSectionActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         questionsList = ArrayList()
+        questionsList.clear()
 
         var questionDocRef = db.collection("posts").document(postUID).collection("questions")
 
@@ -52,7 +53,7 @@ class CommentSectionActivity : AppCompatActivity() {
             if (e != null) {
                 return@addSnapshotListener
             }
-
+            questionsList.clear()
             for (doc in value!!) {
                 val sender = doc.data.get("sender").toString()
                 val question = doc.data.get("question").toString()

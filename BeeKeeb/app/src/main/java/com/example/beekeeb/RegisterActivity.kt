@@ -30,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
             val pass = binding.etPass.text.toString()
             val username = binding.etFirstName.text.toString() + " " + binding.etLastName.text.toString()
             val phoneNum = binding.etPhone.text.toString()
+            val array = listOf("")
 
             if (email.isEmpty() || pass.isEmpty()){
                 Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
@@ -48,7 +49,8 @@ class RegisterActivity : AppCompatActivity() {
                             "user_phone" to phoneNum,
                             "user_birthdate" to "",
                             "user_profile_picture" to "",
-                            "user_about" to ""
+                            "user_about" to "",
+                            "following" to array
                         )
                         db.collection("users").document(uid).set(data)
                             .addOnSuccessListener {

@@ -72,6 +72,8 @@ class ProfileUserFragment : Fragment() {
     private lateinit var settingIV: ImageView
     private lateinit var logoutBtn: Button
 
+    private lateinit var following: List<String>
+
     private lateinit var currUser: User
 
     private lateinit var postData: ArrayList<Post>
@@ -147,7 +149,9 @@ class ProfileUserFragment : Fragment() {
                     val phoneNum = snapshot.data?.get("user_phone").toString()
                     val birthdate = snapshot.data?.get("user_birthdate").toString()
                     val profilePic = snapshot.data?.get("user_profile_picture").toString()
-                    currUser = User(username, email, phoneNum, birthdate, profilePic)
+                    val about = snapshot.data?.get("user_about").toString()
+                    following = snapshot.data?.get("following") as List<String>
+                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following)
                     usernameTV.setText("Hello, ${currUser.username}")
                     if(currUser.profilePicture != ""){
                         Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)

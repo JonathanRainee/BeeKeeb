@@ -35,7 +35,7 @@ class UpdateProfileActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var birthdate: String
     private lateinit var bio: String
-
+    private lateinit var following: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +66,8 @@ class UpdateProfileActivity : AppCompatActivity() {
                     birthdate = snapshot.data?.get("user_birthdate").toString()
                     val profilePic = snapshot.data?.get("user_profile_picture").toString()
                     bio = snapshot.data?.get("user_about").toString()
-                    currUser = User(username, email, phoneNum, birthdate, profilePic)
+                    following = snapshot.data?.get("following") as List<String>
+                    currUser = User(username, bio, email, phoneNum, birthdate, profilePic, following)
                     usernameParts = currUser.username.split(" ")
                     Log.d("firstname", usernameParts[0])
                     Log.d("lastname", usernameParts[0])
