@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.bluejack22_1.BeeKeeb.frag.PostsearchFragment">
+
+    <Spinner
+        android:id="@+id/spinTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/tag"
+        android:padding="5dp"
+        android:prompt="@string/tag_prompt"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/textfield_bg"/>
+
+</FrameLayout>

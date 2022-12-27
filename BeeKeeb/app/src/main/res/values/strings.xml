@@ -28,4 +28,10 @@
     <string name="inpAnswer">Input answer...</string>
     <string name="invalidAns">Answer can\'t be empty</string>
     <string name="successAns">New Answer added</string>
+
+
+    <!--    search-->
+    <string name="inpSearch">Input keyword...</string>
+    <string name="post">Post</string>
+    <string name="user">User</string>
 </resources>
