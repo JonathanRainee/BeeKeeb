@@ -2,6 +2,7 @@ package com.example.beekeeb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -102,6 +103,24 @@ class AnswerActivity : AppCompatActivity() {
                 val path = "posts/"+postUID+"/questions/"+questionUID+"/answers"
                 db.collection(path).add(answer).addOnSuccessListener {
                     Toast.makeText(this, success, Toast.LENGTH_SHORT).show()
+                }
+
+                questionRef.get().addOnSuccessListener { doc ->
+                    val sender = doc.data?.get("sender")
+                    if (currUser.uid != sender){
+                        val newsPath = "users/"+sender+"/news"
+                        val news = hashMapOf(
+                            "sender" to currUser.uid,
+                            "receiver" to sender,
+                            "news" to "just answered your question",
+                            "postID" to postUID
+                        )
+                        db.collection(newsPath).add(news).addOnSuccessListener {
+                            Log.d("like", "success like")
+                        }.addOnFailureListener{
+                            Log.d("like", "failed like")
+                        }
+                    }
                 }
             }else{
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show()

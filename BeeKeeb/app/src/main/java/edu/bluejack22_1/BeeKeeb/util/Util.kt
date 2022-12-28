@@ -2,6 +2,7 @@ package edu.bluejack22_1.BeeKeeb.util
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import com.example.beekeeb.model.CreatePost
 import com.example.beekeeb.model.Post
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,7 +29,7 @@ class Util {
             }
         }
 
-        fun uploadPost(currID: String, post: CreatePost){
+        fun uploadPost(currID: String, post: CreatePost, followedBy: List<String>){
             val likedBy = listOf("")
             val post = hashMapOf(
                 "author" to currID,
@@ -46,6 +47,21 @@ class Util {
                 FirebaseFirestore.getInstance().collection("posts").document(id).update(mapOf(
                     "uid" to id
                 ))
+                for (d in followedBy){
+                    var followingUser = "users/"+d+"/news"
+                    val news = hashMapOf(
+                        "sender" to currID,
+                        "receiver" to d,
+                        "news" to "just posted something",
+                        "postID" to id
+                    )
+                    FirebaseFirestore.getInstance().collection(followingUser).add(news).addOnSuccessListener {
+                        Log.d("like", "success like")
+                    }.addOnFailureListener{
+                        Log.d("like", "failed like")
+                    }
+                }
+
             }
             FirebaseFirestore.getInstance().collection(path).add(post).addOnSuccessListener {
                 var id = it.id.toString()

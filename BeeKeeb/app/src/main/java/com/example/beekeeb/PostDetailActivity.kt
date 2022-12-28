@@ -1,10 +1,12 @@
 package com.example.beekeeb
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.beekeeb.databinding.ActivityPostDetailBinding
 import com.example.beekeeb.model.CreatePost
@@ -118,11 +120,28 @@ class PostDetailActivity : AppCompatActivity() {
             val update = mapOf("likedBy" to arrayUnion(currUserID))
 
             val path = db.collection("posts").document(postUID)
+
             path.update(update).addOnSuccessListener {
                 Log.d("errorhehe", "success")
             }.addOnFailureListener{
                 Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 Log.d("errorhehe", it.message.toString())
+            }
+
+            if(currUserID != AuthorUID){
+                val newsPath = "users/"+AuthorUID+"/news"
+                val news = hashMapOf(
+                    "sender" to currUserID,
+                    "receiver" to AuthorUID,
+                    "news" to "liked your post",
+                    "postID" to postUID
+                )
+                db.collection(newsPath).add(news).addOnSuccessListener {
+                    Log.d("like", "success like")
+                }.addOnFailureListener{
+                    Log.d("like", "failed like")
+                }
+
             }
         }
 
@@ -136,5 +155,10 @@ class PostDetailActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
+    }
+
+    fun closeKeeb(view: View){
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

@@ -21,6 +21,7 @@ import com.example.beekeeb.model.CreatePost
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,6 +51,7 @@ class AddFragment : Fragment() {
     private lateinit var removeBtn: Button
     private lateinit var newPost: CreatePost
     private lateinit var currUser: FirebaseUser
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,7 @@ class AddFragment : Fragment() {
         addbtn = binding.btnAdd
         imageView = binding.ivImg
         addImgBtn = binding.addImgBtn
+        db = FirebaseFirestore.getInstance()
         currUser = FirebaseAuth.getInstance().currentUser!!
         val currID = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val email = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -90,6 +93,7 @@ class AddFragment : Fragment() {
         val array = arrayOf(currUser.uid.toString())
 
         addbtn.setOnClickListener{
+            val currUserData = db.collection("users").document(currUser.uid)
             val tag = binding.spinTag.selectedItem.toString()
             val title = binding.etTitle.text.toString()
             val thread = binding.etThread.text.toString()
@@ -104,11 +108,15 @@ class AddFragment : Fragment() {
                 context?.let { it1 ->
                     Util.uploadImage(email, path, it1){ imageUrl ->
                         newPost = CreatePost(title, thread, tag, imageUrl, currID, 0, "", array)
-                        Util.uploadPost(currID, newPost)
-                        activity?.fragmentManager?.popBackStack()
-                        val intent = Intent(it1, MainPageActivity::class.java)
-                        startActivity(intent)
-                        Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
+                        val data = currUserData.get()
+                        data.addOnSuccessListener { datas ->
+                            val followedBy = datas.data?.get("followedBy") as List<String>
+                            Util.uploadPost(currID, newPost, followedBy)
+                            activity?.fragmentManager?.popBackStack()
+                            val intent = Intent(it1, MainPageActivity::class.java)
+                            startActivity(intent)
+                            Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

@@ -103,6 +103,25 @@ class CommentSectionActivity : AppCompatActivity() {
                 }.addOnFailureListener{
                     Toast.makeText(this, dbError, Toast.LENGTH_SHORT).show()
                 }
+                val authorPath = db.collection("posts").document(postUID)
+                val docs = authorPath.get()
+                docs.addOnSuccessListener { document ->
+                    val authorUID = document.data?.get("author")
+                    if (currUser.uid != authorUID){
+                        val newsPath = "users/"+authorUID+"/news"
+                        val news = hashMapOf(
+                            "sender" to currUser.uid,
+                            "receiver" to authorUID,
+                            "news" to "asked something on your post",
+                            "postID" to postUID
+                        )
+                        db.collection(newsPath).add(news).addOnSuccessListener {
+                            Log.d("like", "success like")
+                        }.addOnFailureListener{
+                            Log.d("like", "failed like")
+                        }
+                    }
+                }
             }
         }
 
