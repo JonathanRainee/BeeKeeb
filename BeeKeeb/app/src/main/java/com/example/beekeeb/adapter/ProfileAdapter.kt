@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.R
 import com.example.beekeeb.model.Post
 import com.example.beekeeb.model.User
+import com.squareup.picasso.Picasso
 
 class ProfileAdapter(private val profileList: ArrayList<User>): RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
 
@@ -29,6 +30,9 @@ class ProfileAdapter(private val profileList: ArrayList<User>): RecyclerView.Ada
         val profile = profileList[position]
         holder.authorTextView.text = profile.username
         holder.aboutTextView.text = profile.about
+        if(profile.profilePicture != ""){
+            Picasso.get().load(profile.profilePicture).fit().centerCrop().into(holder.profileImageView)
+        }
 
         holder.itemView.setOnClickListener{
             onItemClicked?.invoke(profile)

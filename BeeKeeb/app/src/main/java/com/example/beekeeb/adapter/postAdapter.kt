@@ -34,10 +34,10 @@ class postAdapter (private val postList: ArrayList<Post>): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = postList[position]
         holder.authorTextView.text = post.authorName
-        Picasso.get().load(post.authorPicture).fit().centerCrop().into(holder.profileImageView)
+        if(post.authorPicture != "")Picasso.get().load(post.authorPicture).fit().centerCrop().into(holder.profileImageView)
         holder.titleTextView.text = post.title
         holder.threadTextView.text = post.thread
-        Picasso.get().load(post.path).fit().centerCrop().into(holder.mediaImageView)
+        if(post.path != "")Picasso.get().load(post.path).fit().centerCrop().into(holder.mediaImageView)
 
         holder.itemView.setOnClickListener{
             onItemClicked?.invoke(post)

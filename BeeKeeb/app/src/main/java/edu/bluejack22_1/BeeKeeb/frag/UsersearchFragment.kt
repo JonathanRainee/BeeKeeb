@@ -14,6 +14,7 @@ import com.example.beekeeb.R
 import com.example.beekeeb.adapter.ProfileAdapter
 import com.example.beekeeb.databinding.FragmentUsersearchBinding
 import com.example.beekeeb.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +35,7 @@ class UsersearchFragment : Fragment() {
     private var _binding: FragmentUsersearchBinding? = null
     private val binding get() = _binding!!
     private lateinit var db: FirebaseFirestore
+    private val userInstance = FirebaseAuth.getInstance()
 
     private lateinit var profileData: ArrayList<User>
     private lateinit var adapterProfile: ProfileAdapter
@@ -64,6 +66,7 @@ class UsersearchFragment : Fragment() {
         binding.searchBtn.setOnClickListener{
             profileData.clear()
             var keyword = binding.etSearch.text.toString()
+            val currUserID = userInstance.currentUser?.uid.toString()
             val path = db.collection("users").orderBy("user_name").startAt(keyword).endAt(keyword+"\uf8ff")
 
             val docs = path.get()
@@ -77,13 +80,15 @@ class UsersearchFragment : Fragment() {
                     val following = doc.get("following") as List<String>
                     val uid = doc.get("user_id").toString()
                     val profilePic = doc.get("user_profile_picture").toString()
-                    profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
-                    adapterProfile = ProfileAdapter(profileData)
-                    recyclerView.adapter = adapterProfile
-                    adapterProfile.onItemClicked = {
-                        val intent = Intent(context, AnotherProfileActivity::class.java)
-                        intent.putExtra("profileUID", it.id)
-                        startActivity(intent)
+                    if(uid != currUserID){
+                        profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
+                        adapterProfile = ProfileAdapter(profileData)
+                        recyclerView.adapter = adapterProfile
+                        adapterProfile.onItemClicked = {
+                            val intent = Intent(context, AnotherProfileActivity::class.java)
+                            intent.putExtra("profileUID", it.id)
+                            startActivity(intent)
+                        }
                     }
                 }
             }

@@ -102,8 +102,6 @@ class ProfileFragment : Fragment() {
                     val uid = snapshot.data?.get("user_id").toString()
                     currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
                     usernameParts = currUser.username.split(" ")
-                    Log.d("firstname", usernameParts[0])
-                    Log.d("lastname", usernameParts[0])
                     etFirstName.hint = usernameParts[0]
                     etLastName.setHint(usernameParts[1])
 

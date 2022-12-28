@@ -30,7 +30,7 @@ class questionAdapter (private val questionList: ArrayList<Question>): RecyclerV
         val question = questionList[position]
         holder.questionTextView.text = question.question
         holder.authorTextView.text = question.authorName
-        Picasso.get().load(question.authorPicture).fit().centerCrop().into(holder.profileImageView)
+        if(question.authorPicture != "")Picasso.get().load(question.authorPicture).fit().centerCrop().into(holder.profileImageView)
 
         holder.replyImageView.setOnClickListener{
             onItemClicked?.invoke(question)

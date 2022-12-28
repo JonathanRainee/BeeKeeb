@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FieldValue.arrayRemove
 import com.google.firebase.firestore.FieldValue.arrayUnion
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 
 class AnotherProfileActivity : AppCompatActivity() {
 
@@ -121,6 +122,9 @@ class AnotherProfileActivity : AppCompatActivity() {
             }
 
             binding.usernameTv.text = username
+            if(profilePicture != ""){
+                Picasso.get().load(profilePicture).fit().centerCrop().into(binding.profileImv)
+            }
 //            set profile picture nya
 
             val postRef = db.collection("posts").orderBy("author").startAt(profileUID).endAt(profileUID+"\uf8ff")

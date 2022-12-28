@@ -131,7 +131,6 @@ class ProfileUserFragment : Fragment() {
 
 
         settingIV.setOnClickListener{
-//            changeFragment(ProfileFragment())
             val intent = Intent(context, UpdateProfileActivity::class.java)
             startActivity(intent)
         }

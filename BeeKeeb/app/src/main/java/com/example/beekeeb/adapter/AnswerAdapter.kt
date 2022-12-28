@@ -27,7 +27,7 @@ class AnswerAdapter (private val answerList: ArrayList<Answer>): RecyclerView.Ad
         val answer = answerList[position]
         holder.authorTextView.text = answer.authorName
         holder.answerTextView.text = answer.answer
-        Picasso.get().load(answer.authorPicture).fit().centerCrop().into(holder.profileImageView)
+        if(answer.authorPicture != "")Picasso.get().load(answer.authorPicture).fit().centerCrop().into(holder.profileImageView)
     }
 
     override fun getItemCount(): Int {

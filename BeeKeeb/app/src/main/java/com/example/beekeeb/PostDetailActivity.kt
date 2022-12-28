@@ -57,7 +57,7 @@ class PostDetailActivity : AppCompatActivity() {
             if(doc != null){
                 AuthorName = doc.data?.get("user_name").toString()
                 AuthorProfPic = doc.data?.get("user_profile_picture").toString()
-                Picasso.get().load(AuthorProfPic).fit().centerCrop().into(binding.profileIV)
+                if(AuthorProfPic != "")Picasso.get().load(AuthorProfPic).fit().centerCrop().into(binding.profileIV)
                 binding.authorTV.setText(AuthorName)
             }
         }
@@ -78,7 +78,7 @@ class PostDetailActivity : AppCompatActivity() {
                 post = CreatePost(title, thread, tag, path, authorID, like.toInt(), uid, FinalLike)
                 binding.titleTV.setText(title)
                 binding.threadTV.setText(thread)
-                Picasso.get().load(path).into(binding.mediaIV)
+                if(path != "")Picasso.get().load(path).into(binding.mediaIV)
 
                 for (i in FinalLike){
                     Log.d("liked", i)
