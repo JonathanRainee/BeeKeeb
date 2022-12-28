@@ -108,9 +108,9 @@ class AddFragment : Fragment() {
                         activity?.fragmentManager?.popBackStack()
                         val intent = Intent(it1, MainPageActivity::class.java)
                         startActivity(intent)
+                        Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
                     }
                 }
-                Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
             }
 //            Log.d("start btn", "end")
         }

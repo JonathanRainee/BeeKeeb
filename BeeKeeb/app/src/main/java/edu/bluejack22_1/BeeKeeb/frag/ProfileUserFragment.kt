@@ -151,7 +151,8 @@ class ProfileUserFragment : Fragment() {
                     val profilePic = snapshot.data?.get("user_profile_picture").toString()
                     val about = snapshot.data?.get("user_about").toString()
                     following = snapshot.data?.get("following") as List<String>
-                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following)
+                    val uid = snapshot.data?.get("user_id").toString()
+                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
                     usernameTV.setText("Hello, ${currUser.username}")
                     if(currUser.profilePicture != ""){
                         Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)

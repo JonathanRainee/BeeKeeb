@@ -99,7 +99,8 @@ class ProfileFragment : Fragment() {
                     val profilePic = snapshot.data?.get("user_profile_picture").toString()
                     following = snapshot.data?.get("following") as List<String>
                     val about = snapshot.data?.get("user_about").toString()
-                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following)
+                    val uid = snapshot.data?.get("user_id").toString()
+                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
                     usernameParts = currUser.username.split(" ")
                     Log.d("firstname", usernameParts[0])
                     Log.d("lastname", usernameParts[0])

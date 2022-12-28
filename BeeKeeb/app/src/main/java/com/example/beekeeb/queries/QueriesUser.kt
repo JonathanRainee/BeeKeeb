@@ -9,7 +9,7 @@ class QueriesUser {
         fun getUser(userID: String): User {
             val db = Firebase.firestore
             val following = listOf("")
-            var user = User("","","","","", "", following);
+            var user = User("","","","","", "", following, "");
             val docRef = db.collection("users").document(userID)
             docRef.get().addOnSuccessListener { doc ->
                 if(doc != null){
@@ -19,8 +19,9 @@ class QueriesUser {
                     val birthdate = doc.data?.get("user_birthdate").toString()
                     val profilePic = doc.data?.get("user_profile_picture").toString()
                     val about = doc.data?.get("user_about").toString()
+                    val uid = doc.data?.get("user_id").toString()
                     val following = doc.data?.get("following") as List<String>
-                    user = User(username,about,email,phoneNum,birthdate,profilePic, following);
+                    user = User(username,about,email,phoneNum,birthdate,profilePic, following, uid);
                 }
             }
             return user;
@@ -29,7 +30,7 @@ class QueriesUser {
         fun getPostAuthor(authorID: String): User {
             val db = Firebase.firestore
             val following = listOf("")
-            var user = User("","","","","", "", following);
+            var user = User("","","","","", "", following, "");
             val docRef = db.collection("users").document(authorID)
             docRef.get().addOnSuccessListener { doc ->
                 if(doc != null){
@@ -39,8 +40,9 @@ class QueriesUser {
                     val birthdate = doc.data?.get("user_birthdate").toString()
                     val profilePic = doc.data?.get("user_profile_picture").toString()
                     val about = doc.data?.get("user_about").toString()
+                    val uid = doc.data?.get("user_id").toString()
                     val following = doc.data?.get("following") as List<String>
-                    user = User(username,about,email,phoneNum,birthdate,profilePic, following);
+                    user = User(username,about,email,phoneNum,birthdate,profilePic, following, uid);
                 }
             }
             return user;

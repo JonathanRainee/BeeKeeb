@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
             val pass = binding.etPass.text.toString()
             val username = binding.etFirstName.text.toString() + " " + binding.etLastName.text.toString()
             val phoneNum = binding.etPhone.text.toString()
-            val array = listOf("")
+            val array = listOf("ihbuj")
 
             if (email.isEmpty() || pass.isEmpty()){
                 Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()

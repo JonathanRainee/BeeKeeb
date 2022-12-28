@@ -113,8 +113,6 @@ class PostDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//
-
         binding.likeIV.setOnClickListener{
             val list = listOf(currUserID)
             val update = mapOf("likedBy" to arrayUnion(currUserID))

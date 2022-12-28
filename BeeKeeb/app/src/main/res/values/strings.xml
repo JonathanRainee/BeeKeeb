@@ -38,4 +38,6 @@
     <!--    profile-->
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
+
+    <!--    follow-->
 </resources>

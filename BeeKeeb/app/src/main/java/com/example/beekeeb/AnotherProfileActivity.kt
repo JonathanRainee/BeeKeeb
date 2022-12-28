@@ -42,6 +42,7 @@ class AnotherProfileActivity : AppCompatActivity() {
         postData = ArrayList()
 
         val path = db.collection("users").document(curruser.uid)
+        val pathOther = db.collection("users").document(profileUID)
 
         path.addSnapshotListener{ value, e ->
             if(e != null){
@@ -67,7 +68,17 @@ class AnotherProfileActivity : AppCompatActivity() {
             val list = listOf(profileUID)
             Log.d("debuk", "dua")
             val update = mapOf("following" to arrayUnion(profileUID))
+            val currUpdate = mapOf("followedBy" to arrayUnion(curruser.uid))
             Log.d("debuk", "tiga")
+
+            val currUserPath = db.collection("users").document(profileUID)
+            currUserPath.update(currUpdate).addOnSuccessListener {
+                Log.d("errorhehe", "success")
+                Log.d("debuk", "success")
+            }.addOnFailureListener{
+                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+                Log.d("errorhehe", it.message.toString())
+            }
 
             val userPath = db.collection("users").document(curruser.uid)
             Log.d("debuk", curruser.uid)
@@ -90,7 +101,9 @@ class AnotherProfileActivity : AppCompatActivity() {
         }
 
 
-        path.get().addOnSuccessListener { doc ->
+
+
+        pathOther.get().addOnSuccessListener { doc ->
             val username = doc.get("user_name").toString()
             val profilePicture = doc.get("user_profile_picture").toString()
 
@@ -121,7 +134,6 @@ class AnotherProfileActivity : AppCompatActivity() {
                     val tag = document.get("tag").toString();
                     val author = document.get("author").toString();
                     val uid = document.get("uid").toString()
-
 
                     postData.add(Post(title, thread, tag, path, username, profileUID, profilePicture, like, uid))
                     adapterPost = postAdapter(postData)

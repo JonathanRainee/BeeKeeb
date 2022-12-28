@@ -2,6 +2,7 @@ package edu.bluejack22_1.BeeKeeb.frag
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -74,14 +75,14 @@ class UsersearchFragment : Fragment() {
                     val phone = doc.get("user_phone").toString()
                     val birthdate = doc.get("user_birthdate").toString()
                     val following = doc.get("following") as List<String>
-                    val uid = doc.id
+                    val uid = doc.get("user_id").toString()
                     val profilePic = doc.get("user_profile_picture").toString()
-                    profileData.add(User(username, about, email, phone, birthdate, profilePic, following))
+                    profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
                     adapterProfile = ProfileAdapter(profileData)
                     recyclerView.adapter = adapterProfile
                     adapterProfile.onItemClicked = {
                         val intent = Intent(context, AnotherProfileActivity::class.java)
-                        intent.putExtra("profileUID", doc.id)
+                        intent.putExtra("profileUID", it.id)
                         startActivity(intent)
                     }
                 }
