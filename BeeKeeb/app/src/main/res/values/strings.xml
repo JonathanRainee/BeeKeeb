@@ -12,6 +12,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--    toast-->
+    <string name="invalidAns">Answer can\'t be empty</string>
+    <string name="successAns">New Answer added</string>
+    <!--    validations-->
+    <string name="password_confirm_error">Password doesn\'t match</string>
+
+    <!--    infromations-->
+
+
     <!--    all-->
     <string name="dbError">An error has occurred, please try again later</string>
 
@@ -26,8 +34,8 @@
 
     <!--    answer-->
     <string name="inpAnswer">Input answer…</string>
-    <string name="invalidAns">Answer can\'t be empty</string>
-    <string name="successAns">New Answer added</string>
+    <string name="asnwers">Answers</string>
+
 
 
     <!--    search-->
@@ -38,6 +46,53 @@
     <!--    profile-->
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
+
+    <!--    sign in page-->
+    <string name="login_with_email">Login with email</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="password_old_error">Password can\'t be the same as the old one</string>
+    <string name="fields_error">PLease fill all required fields</string>
+    <string name="success_change_pass">Password has successfully changed</string>
+    <string name="wrong_credentials_error">Please enter the right credentials</string>
+    <string name="google_auth_error">Failed to authenticate</string>
+    <string name="register_email_error">Email must be valid</string>
+    <string name="database_error">There is an error occurred, please try again</string>
+    <string name="sent_email_reset_pass_message">A reset password email has been sent to email</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="change_password">Change password</string>
+    <string name="cancel">Cancel</string>
+    <string name="post_title">Post Title</string>
+    <string name="image_or_video">Image / Video</string>
+    <string name="input_text">Input...</string>
+    <string name="thread">Thread</string>
+    <string name="post_tag">Post Tag</string>
+    <string name="register">New to beekeeb ? Sign up here</string>
+    <string name="first_name">Firstname</string>
+    <string name="last_name">Lastname</string>
+    <string name="first_name_hint">John</string>
+    <string name="last_name_hint">Doe</string>
+    <string name="phone_number">Phone number</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in_here">Sign in here</string>
+    <string name="send_link">Send link</string>
+    <string name="about">About</string>
+    <string name="keeb_enthusiast">Keeb enthusiast</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="update_profile">Update profile</string>
+    <string name="logout">logout</string>
+    <string name="hello_greetings">Hello, </string>
+    <string name="create_post">Post</string>
+    <string name="home">Home</string>
+    <string name="news">News</string>
+    <string name="add">Add</string>
+    <string name="profile">Profile</string>
+    <string name="or">Or</string>
+    <string name="success_add_post">Success add a new post</string>
+    <string name="credential_invalid">Credentials are invalid</string>
+
 
     <!--    follow-->
 </resources>

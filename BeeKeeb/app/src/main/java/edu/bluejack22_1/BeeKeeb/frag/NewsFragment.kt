@@ -77,8 +77,9 @@ class NewsFragment : Fragment() {
                 val userData = userRef.get()
                 userData.addOnSuccessListener { dataUser ->
                     val username = dataUser.data?.get("user_name").toString()
+                    val senderImgProfile = dataUser.data?.get("user_profile_picture").toString()
                     val newsFinal = username+" " +news
-                    newsData.add(News(sender, receiver, newsFinal, postID))
+                    newsData.add(News(sender, senderImgProfile,receiver, newsFinal, postID))
                     adapterNews = NewsAdapter(newsData)
                     recyclerView.adapter = adapterNews
                     adapterNews.onItemClicked = {
@@ -96,8 +97,6 @@ class NewsFragment : Fragment() {
             }
         }
 
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_news, container, false)
         return binding.root
     }
 

@@ -67,6 +67,8 @@ class ProfileUserFragment : Fragment() {
     private val userInstance = FirebaseAuth.getInstance()
     private lateinit var path: Uri
 
+    private val greetingsText = R.string.hello_greetings
+
     private lateinit var usernameTV: TextView
     private lateinit var profileImg: ImageView
     private lateinit var settingIV: ImageView
@@ -152,7 +154,7 @@ class ProfileUserFragment : Fragment() {
                     following = snapshot.data?.get("following") as List<String>
                     val uid = snapshot.data?.get("user_id").toString()
                     currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
-                    usernameTV.setText("Hello, ${currUser.username}")
+                    usernameTV.setText("Hi, ${currUser.username}")
                     if(currUser.profilePicture != ""){
                         Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)
                     }
@@ -214,6 +216,7 @@ class ProfileUserFragment : Fragment() {
     }
 
     private var pickImgFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        val failMsg = R.string.database_error
         if (result.resultCode == Activity.RESULT_OK && result.data != null){
             path = result.data!!.data!!
             val fileName = Util.getImageName(path.toString());
@@ -226,7 +229,7 @@ class ProfileUserFragment : Fragment() {
                     Log.d("error", "error while getting download url ")
                 }
             }.addOnFailureListener{
-                Log.d("error", "error while adding to storage")
+                Toast.makeText(context, failMsg, Toast.LENGTH_SHORT).show()
             }
         }
     }

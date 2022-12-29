@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BeeKeeb</string>
+    <string name="tag_prompt">Pilih sebuah tag</string>
+
+    <string-array name="tag">
+        <item>Keyboard</item>
+        <item>Switch</item>
+        <item>Keycaps</item>
+        <item>Case</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    toast-->
+    <string name="invalidAns">Jawaban tidak dapat kosong</string>
+    <string name="successAns">Jawaban telah ditambahkan</string>
+    <!--    validations-->
+    <string name="password_confirm_error">Kata kunci tidak sesuai</string>
+
+    <!--    infromations-->
+
+
+    <!--    all-->
+    <string name="dbError">Terjadi kesalahan, mohon coba lagi</string>
+
+    <!--    post-->
+    <string name="delFailed">Gagal menghapus, mohon coba lagi</string>
+    <string name="delSuccess">Berhasi menghapus</string>
+
+    <!--    comment-->
+    <string name="inpComment">Masukkan komentar…</string>
+    <string name="invalidQ">Pertanyaan tidak dapat kosong</string>
+    <string name="successQ">Pertanyaan baru ditambahkan</string>
+
+    <!--    answer-->
+    <string name="inpAnswer">Masukkan jawaban…</string>
+    <string name="asnwers">Jawaban Pengguna</string>
+
+
+
+    <!--    search-->
+    <string name="inpSearch">Masukkan kata kunci…</string>
+    <string name="post">Unggahan</string>
+    <string name="user">Pengguna</string>
+
+    <!--    profile-->
+    <string name="follow">Ikuti</string>
+    <string name="unfollow">Berhenti mengikuti</string>
+
+    <!--    sign in page-->
+    <string name="login_with_email">Masuk dengan email</string>
+    <string name="sign_in">Masuk</string>
+    <string name="sign_in_google">Masuk dengan Google</string>
+    <string name="password_hint">Kata kunci</string>
+    <string name="forgot_password">Lupa kata kunci ?</string>
+    <string name="password_old_error">Kata kunci tidak dapat sama dengan sebelumnya</string>
+    <string name="fields_error">Mohon isi semua kolom</string>
+    <string name="success_change_pass">Kata kunci berhasil diganti</string>
+    <string name="wrong_credentials_error">Mohon masukan kredensial dengan benar</string>
+    <string name="google_auth_error">Gagal untuk autentikasi</string>
+    <string name="register_email_error">Email harus valid</string>
+    <string name="database_error">Terjadi kesalahan, mohon coba lagi</string>
+    <string name="sent_email_reset_pass_message">Opsi atur ulang kata sandi telah dikirim ke email anda</string>
+    <string name="confirm_password_hint">Konfirmasi kata kunci</string>
+    <string name="change_password">Ubah kata kunci</string>
+    <string name="cancel">Batalkan</string>
+    <string name="post_title">Judul unggahan</string>
+    <string name="image_or_video">Gambar / Video</string>
+    <string name="input_text">Masukkan...</string>
+    <string name="thread">Deskripsi</string>
+    <string name="post_tag">Tag unggahan</string>
+    <string name="register">Pengguna baru ? Daftar disini</string>
+    <string name="first_name">Nama depan</string>
+    <string name="last_name">Nama keluarga</string>
+    <string name="first_name_hint">John</string>
+    <string name="last_name_hint">Doe</string>
+    <string name="phone_number">Nomor telepon</string>
+    <string name="sign_up">Daftar</string>
+    <string name="sign_in_here">Masuk disini</string>
+    <string name="send_link">Kirim tautan</string>
+    <string name="about">Tentang</string>
+    <string name="keeb_enthusiast">Penggemar Keeb</string>
+    <string name="birthdate">Tanggal lahir</string>
+    <string name="update_profile">Ubah profil</string>
+    <string name="logout">Keluar</string>
+    <string name="hello_greetings">Halo</string>
+    <string name="create_post">Unggah</string>
+    <string name="home">Beranda</string>
+    <string name="news">Berita</string>
+    <string name="add">Unggah</string>
+    <string name="profile">Profil</string>
+    <string name="or">atau</string>
+    <string name="success_add_post">Berhasil menambahkan unggahan baru</string>
+    <string name="credential_invalid">Kredential akun tidak valid</string>
+</resources>

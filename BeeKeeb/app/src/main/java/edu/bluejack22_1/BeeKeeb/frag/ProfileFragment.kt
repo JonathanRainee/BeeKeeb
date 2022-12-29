@@ -102,16 +102,16 @@ class ProfileFragment : Fragment() {
                     val uid = snapshot.data?.get("user_id").toString()
                     currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
                     usernameParts = currUser.username.split(" ")
-                    etFirstName.hint = usernameParts[0]
-                    etLastName.setHint(usernameParts[1])
-
+                    Log.d("firstname",usernameParts[0])
+                    Log.d("phone", phoneNum)
+                    etFirstName.setText(usernameParts[0])
+                    etLastName.setText(usernameParts[1])
+                    etPhone.setText(phoneNum)
                 }
             } else {
                 Log.d("snapshot null", "Current data: null")
             }
         }
-
-
 
             Log.d("pressed", "set listener")
         binding.updateBtn.setOnClickListener{

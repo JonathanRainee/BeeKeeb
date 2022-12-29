@@ -124,7 +124,7 @@ class PostDetailActivity : AppCompatActivity() {
             path.update(update).addOnSuccessListener {
                 Log.d("errorhehe", "success")
             }.addOnFailureListener{
-                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 Log.d("errorhehe", it.message.toString())
             }
 

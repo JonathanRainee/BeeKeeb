@@ -64,30 +64,32 @@ class UsersearchFragment : Fragment() {
         profileData = ArrayList()
 
         binding.searchBtn.setOnClickListener{
-            profileData.clear()
             var keyword = binding.etSearch.text.toString()
-            val currUserID = userInstance.currentUser?.uid.toString()
-            val path = db.collection("users").orderBy("user_name").startAt(keyword).endAt(keyword+"\uf8ff")
+            if(keyword != ""){
+                profileData.clear()
+                val currUserID = userInstance.currentUser?.uid.toString()
+                val path = db.collection("users").orderBy("user_name").startAt(keyword).endAt(keyword+"\uf8ff")
 
-            val docs = path.get()
-            docs.addOnSuccessListener { docs ->
-                for(doc in docs){
-                    val username = doc.get("user_name").toString()
-                    val about = doc.get("user_about").toString()
-                    val email = doc.get("user_email").toString()
-                    val phone = doc.get("user_phone").toString()
-                    val birthdate = doc.get("user_birthdate").toString()
-                    val following = doc.get("following") as List<String>
-                    val uid = doc.get("user_id").toString()
-                    val profilePic = doc.get("user_profile_picture").toString()
-                    if(uid != currUserID){
-                        profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
-                        adapterProfile = ProfileAdapter(profileData)
-                        recyclerView.adapter = adapterProfile
-                        adapterProfile.onItemClicked = {
-                            val intent = Intent(context, AnotherProfileActivity::class.java)
-                            intent.putExtra("profileUID", it.id)
-                            startActivity(intent)
+                val docs = path.get()
+                docs.addOnSuccessListener { docs ->
+                    for(doc in docs){
+                        val username = doc.get("user_name").toString()
+                        val about = doc.get("user_about").toString()
+                        val email = doc.get("user_email").toString()
+                        val phone = doc.get("user_phone").toString()
+                        val birthdate = doc.get("user_birthdate").toString()
+                        val following = doc.get("following") as List<String>
+                        val uid = doc.get("user_id").toString()
+                        val profilePic = doc.get("user_profile_picture").toString()
+                        if(uid != currUserID){
+                            profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
+                            adapterProfile = ProfileAdapter(profileData)
+                            recyclerView.adapter = adapterProfile
+                            adapterProfile.onItemClicked = {
+                                val intent = Intent(context, AnotherProfileActivity::class.java)
+                                intent.putExtra("profileUID", it.id)
+                                startActivity(intent)
+                            }
                         }
                     }
                 }

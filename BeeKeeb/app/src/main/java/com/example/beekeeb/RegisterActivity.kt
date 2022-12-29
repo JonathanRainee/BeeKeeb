@@ -35,10 +35,17 @@ class RegisterActivity : AppCompatActivity() {
             val phoneNum = binding.etPhone.text.toString()
             val array = listOf("ihbuj")
 
+            val errors = arrayOf<Int>(
+                R.string.fields_error,
+                R.string.register_email_error,
+                R.string.database_error,
+                R.string.credential_invalid
+            )
+
             if (email.isEmpty() || pass.isEmpty()){
                 Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
-            }else if (!email.endsWith("@gmail.com") && !email.endsWith("@yahoo.com")){
-                Toast.makeText(this, "Email must ends with @gmail.com", Toast.LENGTH_SHORT).show()
+            }else if (email.length <= 10 || (!email.endsWith("@gmail.com") && !email.endsWith("@yahoo.com"))){
+                Toast.makeText(this, errors[1], Toast.LENGTH_SHORT).show()
             }
             else{
                 val storagePath = "defaultPicture/defaultPicture.jpg"
@@ -55,7 +62,8 @@ class RegisterActivity : AppCompatActivity() {
                                 "user_birthdate" to "",
                                 "user_profile_picture" to url.toString(),
                                 "user_about" to "",
-                                "following" to array
+                                "following" to array,
+                                "followedBy" to array
                             )
                             db.collection("users").document(uid).set(data)
                                 .addOnSuccessListener {
@@ -64,12 +72,14 @@ class RegisterActivity : AppCompatActivity() {
                                     startActivity(intent)
                                 }
                                 .addOnFailureListener{
-                                        e-> Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+                                        e-> Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
                                 }
 
                         }else{
-                            Toast.makeText(this, "There's an error in our database, try again later", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, errors[3], Toast.LENGTH_SHORT).show()
                         }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
                     }
                 }.addOnFailureListener {
                     Log.d("error", "error while getting download url ")

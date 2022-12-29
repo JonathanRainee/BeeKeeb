@@ -77,7 +77,7 @@ class AnotherProfileActivity : AppCompatActivity() {
                 Log.d("errorhehe", "success")
                 Log.d("debuk", "success")
             }.addOnFailureListener{
-                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 Log.d("errorhehe", it.message.toString())
             }
 
@@ -88,7 +88,7 @@ class AnotherProfileActivity : AppCompatActivity() {
                 Log.d("errorhehe", "success")
                 Log.d("debuk", "success")
             }.addOnFailureListener{
-                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 Log.d("errorhehe", it.message.toString())
             }
             Log.d("debuk", "lima")

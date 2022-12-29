@@ -29,8 +29,13 @@ class LoginEmailActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val pass = binding.etPass.text.toString()
 
+            val errors = arrayOf<Int>(
+                R.string.fields_error,
+                R.string.wrong_credentials_error
+            )
+
             if(email.isEmpty() || pass.isEmpty()){
-                Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, errors[0], Toast.LENGTH_SHORT).show()
             }else{
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{
                     if(it.isSuccessful){
@@ -38,7 +43,7 @@ class LoginEmailActivity : AppCompatActivity() {
                         val intent = Intent(this, MainPageActivity::class.java)
                         startActivity(intent)
                     }else{
-                        Toast.makeText(this, "Please enter the right credentials", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, errors[1], Toast.LENGTH_SHORT).show()
                     }
                 }
             }

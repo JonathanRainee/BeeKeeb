@@ -77,9 +77,6 @@ class CommentSectionActivity : AppCompatActivity() {
             }
         }
 
-
-
-
         binding.sendBtn.setOnClickListener{
             var question = binding.etComment.text.toString()
 

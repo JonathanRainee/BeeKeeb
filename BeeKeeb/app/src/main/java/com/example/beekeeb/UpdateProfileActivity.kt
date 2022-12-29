@@ -85,7 +85,8 @@ class UpdateProfileActivity : AppCompatActivity() {
         }
 
         binding.btnUpdate.setOnClickListener {
-            Log.d("kntl", "salkdfna")
+            val failMsg = R.string.fields_error
+
             val firstname = etFirstName.text.toString()
             val lastname = etLastName.text.toString()
             val usernameUpd = firstname + " " + lastname
@@ -116,7 +117,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }else{
-                Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, failMsg, Toast.LENGTH_SHORT).show()
             }
         }
 

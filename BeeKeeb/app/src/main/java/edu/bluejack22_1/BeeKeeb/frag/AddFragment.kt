@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.beekeeb.MainPageActivity
+import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentAddBinding
 import com.example.beekeeb.model.CreatePost
 import com.google.firebase.auth.FirebaseAuth
@@ -90,9 +91,13 @@ class AddFragment : Fragment() {
         removeBtn.setOnClickListener{
             removeImg()
         }
-        val array = arrayOf(currUser.uid.toString())
+        val array = arrayOf(currUser.uid)
+
 
         addbtn.setOnClickListener{
+            val failMsg = R.string.fields_error
+            val successsMsg = R.string.success_add_post
+
             val currUserData = db.collection("users").document(currUser.uid)
             val tag = binding.spinTag.selectedItem.toString()
             val title = binding.etTitle.text.toString()
@@ -102,7 +107,7 @@ class AddFragment : Fragment() {
             Log.d("start btn", title + " " + thread);
             if(title.isEmpty() || thread.isEmpty()){
                 Log.d("if debugs", "debug if")
-                Toast.makeText(context, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, failMsg, Toast.LENGTH_SHORT).show()
 //                Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
             }else{
                 context?.let { it1 ->
@@ -115,7 +120,7 @@ class AddFragment : Fragment() {
                             activity?.fragmentManager?.popBackStack()
                             val intent = Intent(it1, MainPageActivity::class.java)
                             startActivity(intent)
-                            Toast.makeText(context, "New post added", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, successsMsg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

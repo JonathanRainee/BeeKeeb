@@ -66,7 +66,7 @@
         android:id="@+id/answerdTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Answers"
+        android:text="@string/asnwers"
         app:layout_constraintTop_toBottomOf="@+id/cv"
         android:textSize="24dp"
         android:paddingLeft="14dp"

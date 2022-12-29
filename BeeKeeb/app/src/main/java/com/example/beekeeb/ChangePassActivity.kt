@@ -51,24 +51,31 @@ class ChangePassActivity : AppCompatActivity() {
             val newPass = binding.etPass.text.toString()
             val newConfpass = binding.etConfpass.text.toString()
 
+            val errors = arrayOf<Int>(
+                R.string.password_confirm_error,
+                R.string.password_old_error,
+                R.string.fields_error,
+            )
+            val successMsg = R.string.success_change_pass
+
             if(newPass != "" && newConfpass != ""){
                 if (newPass != newConfpass){
-                    Toast.makeText(this, "Password and confiirmation password doesn't match", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, errors[0], Toast.LENGTH_SHORT).show()
 
                 } else if(newPass == oldPass){
-                    Toast.makeText(this, "Password can't be the same as the old password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, errors[1], Toast.LENGTH_SHORT).show()
                 }
                 else{
                     user.updatePassword(newPass).addOnCompleteListener{
                         reference.update(mapOf(
                             "user_password" to newPass
                         ))
-                        Toast.makeText(this, "Password succesfuly changed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, successMsg, Toast.LENGTH_SHORT).show()
                         this.finish()
                     }
                 }
             }else{
-                Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
             }
         }
 

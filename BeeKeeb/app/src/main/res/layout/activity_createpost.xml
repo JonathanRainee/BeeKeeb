@@ -14,7 +14,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="25dp"
-        android:text="Post Title"
+        android:text="@string/post_title"
         android:textColor="@color/black"
         android:textSize="16sp"/>
 
@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/textfield_bg"
-        android:hint="Actuation Point"
+        android:hint="@string/input_text"
         android:inputType="text"
         android:padding="10dp"/>
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/etTitle"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Thread"
+        android:text="@string/thread"
         android:textColor="@color/black"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -55,7 +55,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/textfield_bg"
-        android:hint="Actuation Point"
+        android:hint="@string/input_text"
         android:inputType="textMultiLine"
         android:padding="10dp" />
 
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/etThread"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Post Tag"
+        android:text="@string/post_tag"
         android:textColor="@color/black"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -103,7 +103,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Image / Video"
+            android:text="@string/image_or_video"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -135,7 +135,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/login_btn"
-        android:text="POST"
+        android:text="@string/create_post"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"

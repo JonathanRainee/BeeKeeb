@@ -11,11 +11,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-//    var user = getString(R.string.user)
-//    var post = getString(R.string.post)
-//    var tableTitle = arrayOf(user, post)
 
-    var tableTitle = arrayOf("Post", "User")
+    val postText = R.string.post
+    val userText = R.string.user
+    var tableTitle = arrayOf<Int>(postText, userText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -28,8 +27,8 @@ class SearchActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, pager){
             tab, position ->
                 tab.text = when(position){
-                    0 -> getString(R.string.post)
-                    else -> getString(R.string.user)
+                    0 -> getString(tableTitle[0])
+                    else -> getString(tableTitle[1])
                 }
         }.attach()
 

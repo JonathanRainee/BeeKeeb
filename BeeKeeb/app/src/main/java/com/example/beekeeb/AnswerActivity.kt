@@ -102,6 +102,7 @@ class AnswerActivity : AppCompatActivity() {
 //                val path = "posts/"+postUID+"/questions"
                 val path = "posts/"+postUID+"/questions/"+questionUID+"/answers"
                 db.collection(path).add(answer).addOnSuccessListener {
+                    binding.etAnswer.setText("")
                     Toast.makeText(this, success, Toast.LENGTH_SHORT).show()
                 }
 

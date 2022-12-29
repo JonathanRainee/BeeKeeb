@@ -96,6 +96,8 @@ class LoginOptionActivity : AppCompatActivity() {
 
     private fun signInAttempt(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        val failMsg = R.string.google_auth_error
+
         auth.signInWithCredential(credential).addOnCompleteListener{
             if(it.isSuccessful){
                 val uid = auth.currentUser?.uid.toString()
@@ -118,7 +120,7 @@ class LoginOptionActivity : AppCompatActivity() {
                 }
 
             }else{
-                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, failMsg, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -20,6 +20,9 @@ class ResetpasswordActivity : AppCompatActivity() {
         binding.btnSend.setOnClickListener{
             val email = binding.etEmail.text.toString()
 
+            val failMsg = R.string.database_error
+            val emailSent = R.string.sent_email_reset_pass_message
+
             if(email.isEmpty() || !email.endsWith("@gmail.com")){
                 Toast.makeText(this, "Please input a valid email", Toast.LENGTH_SHORT).show()
             }else{
@@ -27,7 +30,7 @@ class ResetpasswordActivity : AppCompatActivity() {
                     if(it.isSuccessful){
                         Toast.makeText(this, "A reset password email has been sent to your email", Toast.LENGTH_SHORT).show()
                     }else{
-                        Toast.makeText(this, "There's an error in our database, try again later", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, failMsg, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -8,13 +8,33 @@
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile(2)/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile(2)/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile_user.xml" value="0.1" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile(2)/TPA-Mobile/BeeKeeb/app/src/main/res/menu/bottom_nav.xml" value="0.15833333333333333" />
-        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_another_profile.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/acitivity_loginoption.xml" value="0.136" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_another_profile.xml" value="0.264" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_answer.xml" value="0.4" />
-        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_post_detail.xml" value="0.12447916666666667" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_change_pass.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_comment_section.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_createpost.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_home.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_main_page.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_post_detail.xml" value="0.4" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_register.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_resetpassword.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_search.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/activity_updateprofile.xml" value="0.3625" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/answer_card.xml" value="0.6" />
-        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_profile.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/comment_card.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_add.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_news.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_postsearch.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_profile_user.xml" value="0.536" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/fragment_usersearch.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/news_card.xml" value="0.3625" />
         <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/post_card.xml" value="0.4" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/layout/profile_card.xml" value="0.3625" />
+        <entry key="..\:/Users/Melati/Documents/FileBW/SLC/TPA-Mobile/TPA-Mobile-BeeKeeb/BeeKeeb/app/src/main/res/menu/bottom_nav.xml" value="0.3625" />
         <entry key="..\:/Users/jonat/AndroidStudioProjects/BeeKeeb/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.232" />
         <entry key="..\:/Users/jonat/AndroidStudioProjects/BeeKeeb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.232" />
         <entry key="..\:/Users/jonat/AndroidStudioProjects/BeeKeeb/app/src/main/res/drawable/login_bg.xml" value="0.2765" />
@@ -51,12 +71,10 @@
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/comment_card.xml" value="0.1" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_add.xml" value="0.2453125" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_news.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/fragment_profile_user.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/home_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/loginoption_layout.xml" value="0.25" />
-        <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/news_card.xml" value="0.2609375" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/post_card.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/layout/register_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/jonat/OneDrive/Documents/GitHub/TPA-Mobile/BeeKeeb/app/src/main/res/menu/bottom_nav.xml" value="0.2875" />

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.R
 import com.example.beekeeb.model.News
 import com.example.beekeeb.model.Post
+import com.squareup.picasso.Picasso
 
 class NewsAdapter(private val newsList: ArrayList<News>): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
@@ -28,7 +29,7 @@ class NewsAdapter(private val newsList: ArrayList<News>): RecyclerView.Adapter<N
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val news = newsList[position]
         holder.newsTextView.text = news.news
-//        set image
+        if(news.senderImgProfile != "")Picasso.get().load(news.senderImgProfile).fit().centerCrop().into(holder.profileImageView)
 
         holder.itemView.setOnClickListener{
             onItemClicked?.invoke(news)

@@ -24,7 +24,7 @@
             android:layout_marginTop="200dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/login_btn"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -36,7 +36,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/login_btn"
-            android:text="New to BeeKeeb? Sign Up Here"
+            android:text="@string/register"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp" />
