@@ -12,12 +12,10 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentProfileBinding
-import com.example.beekeeb.databinding.FragmentProfileUserBinding
 import com.example.beekeeb.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
