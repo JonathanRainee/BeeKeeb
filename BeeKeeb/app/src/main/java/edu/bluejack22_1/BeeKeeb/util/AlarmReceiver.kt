@@ -1,5 +1,6 @@
 package edu.bluejack22_1.BeeKeeb.util
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,29 +11,38 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.beekeeb.MainActivity
 import com.example.beekeeb.R
 
+const val code = 1
+const val channelID = "channel1"
+
 class AlarmReceiver : BroadcastReceiver() {
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
         sendNotification(context)
 
     }
 
-    private fun sendNotification(context: Context?) {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+    companion object {
+        fun sendNotification(context: Context?) {
+            val intent = Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            val pendingIntent: PendingIntent = PendingIntent.getActivity(context, code, intent, 0)
 
-        val builder = NotificationCompat.Builder(context!!, "beekeebNotif")
-            .setSmallIcon(R.drawable.ic_baseline_notifications_24)
-            .setContentTitle("Beekeb Notification")
-            .setContentText("Have you seen the news today ?")
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            val builder = NotificationCompat.Builder(context!!, "beekeebNotif")
+                .setSmallIcon(R.drawable.ic_baseline_notifications_24)
+                .setContentTitle("Beekeb Notification")
+                .setContentText("Have you seen the news today ?")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
 
-        with(NotificationManagerCompat.from(context)) {
-            notify(1, builder.build())
+            with(NotificationManagerCompat.from(context)) {
+                notify(code, builder.build())
+            }
+//            val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//            notifManager.notify(code, builder.build())
         }
     }
+
 }

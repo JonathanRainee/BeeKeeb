@@ -98,7 +98,6 @@ class ProfileUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileUserBinding.inflate(inflater, container, false)
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
@@ -106,6 +105,7 @@ class ProfileUserFragment : Fragment() {
         val reference = db.collection("users").document(userInstance.uid.toString())
         val postRef = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
 
+        context?.let { Util.loadingDialog(it) }
         recyclerView = binding.postRV
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -187,7 +187,9 @@ class ProfileUserFragment : Fragment() {
                         postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
                         adapterPost = postAdapter(postData)
                         recyclerView.adapter = adapterPost
+                        Util.dismissLoadingDialog()
                         adapterPost.onItemClicked = {
+
                             val intent = Intent(context, PostDetailActivity::class.java)
                             intent.putExtra("uid", it.uid)
                             intent.putExtra("authorUID", it.authorUID)
@@ -196,6 +198,7 @@ class ProfileUserFragment : Fragment() {
                     }else {
                         Log.d("doc not found", "No such document")
                     }
+
                 }.addOnFailureListener { e ->
                     Log.d("Error Get User", e.toString())
                 }

@@ -16,6 +16,7 @@ import com.example.beekeeb.model.News
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +60,8 @@ class NewsFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         currUser = FirebaseAuth.getInstance().currentUser!!
 
+        context?.let { Util.loadingDialog(it) }
+
         recyclerView = binding.newsRV
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -82,6 +85,7 @@ class NewsFragment : Fragment() {
                     newsData.add(News(sender, senderImgProfile,receiver, newsFinal, postID))
                     adapterNews = NewsAdapter(newsData)
                     recyclerView.adapter = adapterNews
+                    Util.dismissLoadingDialog()
                     adapterNews.onItemClicked = {
                         val intent = Intent(context, PostDetailActivity::class.java)
                         val postPath = db.collection("posts").document(it.postID)

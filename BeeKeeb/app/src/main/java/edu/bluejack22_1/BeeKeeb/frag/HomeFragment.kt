@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +63,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         db = FirebaseFirestore.getInstance()
         currUser = FirebaseAuth.getInstance().currentUser!!
+        context?.let { Util.loadingDialog(it) }
 
         recyclerView = binding.postRV
         recyclerView.setHasFixedSize(true)
@@ -99,12 +101,14 @@ class HomeFragment : Fragment() {
                                 postData.add(Post(title, thread, tag, path, username, authorID, profilePic, 0, uid))
                                 adapterPost = postAdapter(postData)
                                 recyclerView.adapter = adapterPost
+                                Util.dismissLoadingDialog()
                                 adapterPost.onItemClicked = {
                                     val intent = Intent(context, PostDetailActivity::class.java)
                                     intent.putExtra("uid", it.uid)
                                     intent.putExtra("authorUID", it.authorUID)
                                     startActivity(intent)
                                 }
+
                             }else{
                                 Log.d("doc not found", "No such document")
                             }

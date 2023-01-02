@@ -65,8 +65,12 @@ class PostDetailActivity : AppCompatActivity() {
         }
 
         val docref = db.collection("posts").document(postUID)
-        docref.get().addOnSuccessListener { doc ->
-            if(doc != null){
+        docref.addSnapshotListener{ doc,e ->
+            if (e != null) {
+                return@addSnapshotListener
+            }
+
+            if (doc != null && doc.exists()) {
                 title = doc.data?.get("title").toString()
                 thread = doc.data?.get("thread").toString()
                 tag = doc.data?.get("tag").toString()
@@ -87,16 +91,19 @@ class PostDetailActivity : AppCompatActivity() {
                 }
                 if (LikedBy.contains(currUserID)){
                     binding.likeIV.visibility = View.GONE
+                    binding.likedIV.visibility = View.VISIBLE
                 }else{
                     binding.likedIV.visibility = View.GONE
+                    binding.likeIV.visibility = View.VISIBLE
                 }
                 val totalLike = (LikedBy.size)-1
 
                 binding.likeTV.setText(totalLike.toString())
+            } else {
+                Log.d("Error", "Current data: null")
             }
+
         }
-
-
 
         if(AuthorUID != currUserID){
             binding.deleteIV.visibility = View.GONE

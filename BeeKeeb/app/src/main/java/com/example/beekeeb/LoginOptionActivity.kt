@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.BeeKeeb.util.AlarmReceiver
 
 class LoginOptionActivity : AppCompatActivity() {
 
@@ -40,7 +41,7 @@ class LoginOptionActivity : AppCompatActivity() {
 
         binding.btnEmail.setOnClickListener(){
             val intentEmail = Intent(this, LoginEmailActivity::class.java)
-            startActivity(intentEmail)
+            startActivityForResult(intentEmail, 2)
         }
 
         binding.googleBtn.setOnClickListener{
@@ -50,7 +51,7 @@ class LoginOptionActivity : AppCompatActivity() {
 
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
-//        startActivityForResult(signInIntent, 1001)
+
         launcher.launch(signInIntent)
     }
 
@@ -118,7 +119,7 @@ class LoginOptionActivity : AppCompatActivity() {
                 }.addOnFailureListener{
                         e-> Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
                 }
-
+                AlarmReceiver.sendNotification(this)
             }else{
                 Toast.makeText(this, failMsg, Toast.LENGTH_SHORT).show()
             }

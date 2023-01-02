@@ -16,6 +16,7 @@ import com.example.beekeeb.databinding.FragmentUsersearchBinding
 import com.example.beekeeb.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,6 +65,7 @@ class UsersearchFragment : Fragment() {
         profileData = ArrayList()
 
         binding.searchBtn.setOnClickListener{
+            context?.let { Util.loadingDialog(it) }
             var keyword = binding.etSearch.text.toString()
             if(keyword != ""){
                 profileData.clear()
@@ -85,6 +87,7 @@ class UsersearchFragment : Fragment() {
                             profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
                             adapterProfile = ProfileAdapter(profileData)
                             recyclerView.adapter = adapterProfile
+                            Util.dismissLoadingDialog()
                             adapterProfile.onItemClicked = {
                                 val intent = Intent(context, AnotherProfileActivity::class.java)
                                 intent.putExtra("profileUID", it.id)

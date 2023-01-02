@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.beekeeb.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import edu.bluejack22_1.BeeKeeb.util.AlarmReceiver
 
 class LoginEmailActivity : AppCompatActivity() {
 
@@ -40,6 +41,9 @@ class LoginEmailActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{
                     if(it.isSuccessful){
                         this.finish()
+                        finishActivity(1)
+                        finishActivity(2)
+                        AlarmReceiver.sendNotification(this)
                         val intent = Intent(this, MainPageActivity::class.java)
                         startActivity(intent)
                     }else{
@@ -50,12 +54,4 @@ class LoginEmailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-//        if(firebaseAuth.currentUser != null){
-//            val intent = Intent(this, HomepageActivity::class.java)
-//            startActivity(intent)
-//        }
-    }
 }

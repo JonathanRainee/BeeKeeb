@@ -17,6 +17,7 @@ import com.example.beekeeb.databinding.FragmentPostsearchBinding
 import com.example.beekeeb.model.Post
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -117,7 +118,7 @@ class PostsearchFragment : Fragment() {
         })
 
         binding.sendBtn.setOnClickListener{
-            Log.d("search", "search")
+            context?.let { Util.loadingDialog(it) }
             postData.clear()
             var keyword = binding.etKeyword.text.toString()
             val regex = Regex("^"+keyword+".*")
@@ -146,6 +147,7 @@ class PostsearchFragment : Fragment() {
                             postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
                             adapterPost = postAdapter(postData)
                             recyclerView.adapter = adapterPost
+                            Util.dismissLoadingDialog()
                             adapterPost.onItemClicked = {
                                 val intent = Intent(context, PostDetailActivity::class.java)
                                 intent.putExtra("uid", it.uid)

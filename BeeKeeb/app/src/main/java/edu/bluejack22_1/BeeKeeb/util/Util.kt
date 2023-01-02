@@ -1,5 +1,6 @@
 package edu.bluejack22_1.BeeKeeb.util
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.net.Uri
 import android.util.Log
@@ -12,6 +13,18 @@ import com.google.firebase.storage.FirebaseStorage
 class Util {
 
     companion object{
+        lateinit var progressDialog: ProgressDialog
+        fun loadingDialog(context: Context){
+            progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Loading...")
+            progressDialog.show()
+        }
+
+        fun dismissLoadingDialog(){
+            progressDialog.dismiss()
+        }
+
+
         fun getImageName(path: String): String{
             return path.substring(path.lastIndexOf("/") + 1)
         }

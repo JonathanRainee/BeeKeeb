@@ -19,6 +19,7 @@ class MainPageActivity : AppCompatActivity() {
         changeFragment(HomeFragment())
         auth = FirebaseAuth.getInstance()
 
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.miHome -> changeFragment(HomeFragment())

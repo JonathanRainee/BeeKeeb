@@ -98,10 +98,6 @@ class UpdateProfileActivity : AppCompatActivity() {
             val about = etABout.text.toString()
 
             if(firstname != "" && lastname != "" && about != "" && phoneUpd != ""){
-                Log.d("dbg username", usernameUpd+" "+username)
-                Log.d("dbg birth", birthdateUpd+" "+birthdate)
-                Log.d("dbg phone", phoneUpd+" "+phoneNum)
-                Log.d("dbg about", about+" "+bio)
                 if(usernameUpd == username && birthdateUpd == birthdate && phoneUpd == phoneNum && about == bio){
                     Toast.makeText(this, "Please input a new profile data", Toast.LENGTH_SHORT).show()
                 }
