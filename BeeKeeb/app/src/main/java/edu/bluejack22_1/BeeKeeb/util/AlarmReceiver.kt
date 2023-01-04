@@ -24,10 +24,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
         fun sendNotification(context: Context?) {
-            val intent = Intent(context, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            val pendingIntent: PendingIntent = PendingIntent.getActivity(context, code, intent, 0)
+            val intent = Intent(context, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, code, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
             val builder = NotificationCompat.Builder(context!!, "beekeebNotif")
                 .setSmallIcon(R.drawable.ic_baseline_notifications_24)

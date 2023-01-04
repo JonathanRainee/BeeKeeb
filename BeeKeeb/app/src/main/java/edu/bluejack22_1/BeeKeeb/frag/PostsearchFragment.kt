@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beekeeb.PostDetailActivity
@@ -76,37 +77,42 @@ class PostsearchFragment : Fragment() {
                 val path = db.collection("posts").orderBy("tag").startAt(item).endAt(item+"\uf8ff")
                 val docs = path.get()
                 docs.addOnSuccessListener { docs ->
-                    for (doc in docs){
-                        val title = doc.get("title").toString();
-                        val thread = doc.get("thread").toString();
-                        val path = doc.get("path").toString();
-                        val like = doc.get("like").toString().toInt();
-                        val tag = doc.get("tag").toString();
-                        val author = doc.get("author").toString();
-                        val uid = doc.get("uid").toString()
-                        val docRef = db.collection("users").document(author)
-                        docRef.get().addOnSuccessListener { doc ->
-                            if (doc != null){
-                                val authorID = doc.id
-                                val username = doc.data?.get("user_name").toString()
-                                val profilePic = doc.data?.get("user_profile_picture").toString()
-                                Log.d("ini post", title+" "+thread+" "+tag+" "+author+" "+username)
-                                postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
-                                adapterPost = postAdapter(postData)
-                                recyclerView.adapter = adapterPost
-                                adapterPost.onItemClicked = {
-                                    val intent = Intent(context, PostDetailActivity::class.java)
-                                    intent.putExtra("uid", it.uid)
-                                    intent.putExtra("authorUID", it.authorUID)
-                                    startActivity(intent)
+                    if(docs != null) {
+                        for (doc in docs){
+                            val title = doc.get("title").toString();
+                            val thread = doc.get("thread").toString();
+                            val path = doc.get("path").toString();
+                            val like = doc.get("like").toString().toInt();
+                            val tag = doc.get("tag").toString();
+                            val author = doc.get("author").toString();
+                            val uid = doc.get("uid").toString()
+                            val docRef = db.collection("users").document(author)
+                            docRef.get().addOnSuccessListener { doc ->
+                                if (doc != null){
+                                    val authorID = doc.id
+                                    val username = doc.data?.get("user_name").toString()
+                                    val profilePic = doc.data?.get("user_profile_picture").toString()
+                                    Log.d("ini post", title+" "+thread+" "+tag+" "+author+" "+username)
+                                    postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
+                                    adapterPost = postAdapter(postData)
+                                    recyclerView.adapter = adapterPost
+                                    adapterPost.onItemClicked = {
+                                        val intent = Intent(context, PostDetailActivity::class.java)
+                                        intent.putExtra("uid", it.uid)
+                                        intent.putExtra("authorUID", it.authorUID)
+                                        startActivity(intent)
+                                    }
+                                }else{
+                                    Log.d("doc not found", "No such document")
                                 }
-                            }else{
-                                Log.d("doc not found", "No such document")
+                            }.addOnFailureListener{ e ->
+                                Log.d("Error Get User", e.toString())
                             }
-                        }.addOnFailureListener{ e ->
-                            Log.d("Error Get User", e.toString())
                         }
                     }
+                }.addOnFailureListener{
+                    Util.dismissLoadingDialog()
+                    Toast.makeText(context, R.string.postNotFound, Toast.LENGTH_LONG).show()
                 }
 
             }

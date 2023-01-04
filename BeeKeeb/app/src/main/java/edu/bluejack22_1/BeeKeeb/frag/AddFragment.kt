@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import com.example.beekeeb.MainPageActivity
 import com.example.beekeeb.R
 import com.example.beekeeb.databinding.FragmentAddBinding
@@ -67,6 +68,7 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        path = "".toUri()
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         removeBtn = binding.removeImgBtn
         addbtn = binding.btnAdd
@@ -110,20 +112,38 @@ class AddFragment : Fragment() {
                 Toast.makeText(context, failMsg, Toast.LENGTH_SHORT).show()
 //                Toast.makeText(this, "Please fill all of the required fields", Toast.LENGTH_SHORT).show()
             }else{
-                context?.let { it1 ->
-                    Util.uploadImage(email, path, it1){ imageUrl ->
-                        newPost = CreatePost(title, thread, tag, imageUrl, currID, 0, "", array)
-                        val data = currUserData.get()
-                        data.addOnSuccessListener { datas ->
-                            val followedBy = datas.data?.get("followedBy") as List<String>
-                            Util.uploadPost(currID, newPost, followedBy)
-                            activity?.fragmentManager?.popBackStack()
-                            val intent = Intent(it1, MainPageActivity::class.java)
-                            startActivity(intent)
-                            Toast.makeText(context, successsMsg, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+               if(path != "".toUri()){
+                   context?.let { it1 ->
+                       Util.uploadImage(email, path, it1){ imageUrl ->
+                           newPost = CreatePost(title, thread, tag, imageUrl, currID, 0, "", array)
+                           val data = currUserData.get()
+                           data.addOnSuccessListener { datas ->
+
+                               val followedBy = datas.data?.get("followedBy") as List<String>
+                               Util.uploadPost(currID, newPost, followedBy)
+                               activity?.fragmentManager?.popBackStack()
+                               val intent = Intent(it1, MainPageActivity::class.java)
+                               startActivity(intent)
+                               Toast.makeText(context, successsMsg, Toast.LENGTH_SHORT).show()
+                           }
+                       }
+                   }
+               }else{
+                   context?.let { it1 ->
+                       newPost = CreatePost(title, thread, tag, "", currID, 0, "", array)
+                       val data = currUserData.get()
+                       data.addOnSuccessListener { datas ->
+
+                           val followedBy = datas.data?.get("followedBy") as List<String>
+                           Util.uploadPost(currID, newPost, followedBy)
+                           activity?.fragmentManager?.popBackStack()
+                           val intent = Intent(it1, MainPageActivity::class.java)
+                           startActivity(intent)
+                           Toast.makeText(context, successsMsg, Toast.LENGTH_SHORT).show()
+                       }
+                   }
+               }
+
             }
 //            Log.d("start btn", "end")
         }
@@ -155,7 +175,6 @@ class AddFragment : Fragment() {
             binding.ivImg.visibility =View.VISIBLE
             binding.ivImg.setImageBitmap(bitmap)
             Log.d("imageview", path.toString())
-
         }
     }
 

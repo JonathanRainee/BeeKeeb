@@ -93,4 +93,6 @@
     <string name="or">atau</string>
     <string name="success_add_post">Berhasil menambahkan unggahan baru</string>
     <string name="credential_invalid">Kredential akun tidak valid</string>
+    <string name="userNotFound">Pengguna tidak ditemukan</string>
+    <string name="postNotFound">Unggahan tidak ditemukan</string>
 </resources>

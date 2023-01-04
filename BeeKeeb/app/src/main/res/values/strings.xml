@@ -92,6 +92,8 @@
     <string name="or">Or</string>
     <string name="success_add_post">Success add a new post</string>
     <string name="credential_invalid">Credentials are invalid</string>
+    <string name="userNotFound">User not found</string>
+    <string name="postNotFound">Post not found</string>
 
 
     <!--    follow-->

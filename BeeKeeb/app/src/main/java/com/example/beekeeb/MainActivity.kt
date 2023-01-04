@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun setNotification() {
         val notifID = 1
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
+        val intent = Intent(this, MainActivity::class.java)
 
         val pendingIntent = PendingIntent.getBroadcast(this, notifID, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 

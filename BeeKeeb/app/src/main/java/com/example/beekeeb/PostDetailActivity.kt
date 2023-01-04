@@ -85,7 +85,7 @@ class PostDetailActivity : AppCompatActivity() {
                 binding.titleTV.setText(title)
                 binding.threadTV.setText(thread)
                 if(path != "")Picasso.get().load(path).into(binding.mediaIV)
-
+                else binding.mediaIV.visibility = View.GONE
                 for (i in FinalLike){
                     Log.d("liked", i)
                 }

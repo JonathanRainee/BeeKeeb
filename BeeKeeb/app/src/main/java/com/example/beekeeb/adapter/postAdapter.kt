@@ -38,7 +38,7 @@ class postAdapter (private val postList: ArrayList<Post>): RecyclerView.Adapter<
         holder.titleTextView.text = post.title
         holder.threadTextView.text = post.thread
         if(post.path != "")Picasso.get().load(post.path).fit().centerCrop().into(holder.mediaImageView)
-
+        else holder.mediaImageView.visibility = View.GONE
         holder.itemView.setOnClickListener{
             onItemClicked?.invoke(post)
         }
