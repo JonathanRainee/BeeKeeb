@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intentSignIn, 1)
         }
 
+        //test
 
         binding.btnRegister.setOnClickListener{
             val intentSignIn = Intent(this, LoginOptionActivity::class.java)
