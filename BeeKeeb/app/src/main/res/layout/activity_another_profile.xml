@@ -42,7 +42,7 @@
                 android:layout_height="30dp"
                 android:text="@string/unfollow"
                 android:layout_marginLeft="5dp"
-                android:background="@color/cancel_red"
+                android:background="@drawable/cancel_btn"
                 android:id="@+id/unfollowBtn"/>
         </LinearLayout>
 

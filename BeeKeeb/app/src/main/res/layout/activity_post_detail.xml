@@ -6,38 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".PostDetailActivity">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profileIV"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:circularflow_radiusInDP="10dp"
-        android:src="@drawable/logo1"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/authorTV"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="author"
-        android:textSize="20dp"
-        android:paddingTop="10dp"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintStart_toEndOf="@id/profileIV"
-        app:layout_constraintTop_toTopOf="@id/profileIV"/>
+        android:id="@+id/rl"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/deleteIV"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="20dp"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profileIV"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/logo1"
+            app:circularflow_radiusInDP="10dp"/>
+
+        <TextView
+            android:id="@+id/authorTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/profileIV"
+            android:text="author"
+            android:textSize="24dp" />
+
+        <ImageView
+            android:id="@+id/deleteIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
 
 
     <TextView
@@ -45,20 +50,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:text="title"
+        android:text="iniiiiiiii title"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileIV" />
+        app:layout_constraintTop_toBottomOf="@id/rl" />
 
     <TextView
         android:id="@+id/threadTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
-        android:paddingLeft="20dp"
         android:text="ini threaddddddddddddddddddddddddddddd"
-        android:textSize="16dp"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTV" />
 
@@ -115,27 +119,15 @@
         app:layout_constraintTop_toBottomOf="@+id/mediaIV"
         app:layout_constraintLeft_toRightOf="@id/likeTV"/>
 
-
-    <TextView
-        android:id="@+id/qnaTV"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toBottomOf="@id/mediaIV"
-        app:layout_constraintLeft_toRightOf="@id/separator"
-        android:text=""
-        android:textSize="24dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"/>
-
     <ImageView
         android:id="@+id/qnaIV"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_question_answer_24"
         app:layout_constraintTop_toBottomOf="@+id/mediaIV"
-        app:layout_constraintLeft_toRightOf="@id/qnaTV"
+        app:layout_constraintLeft_toRightOf="@id/separator"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="2dp"/>
+        android:layout_marginLeft="10dp"/>
 
 
 

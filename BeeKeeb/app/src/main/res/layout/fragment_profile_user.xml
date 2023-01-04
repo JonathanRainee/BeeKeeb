@@ -7,38 +7,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="50dp"
+        android:padding="25dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/profileImv"
-                android:src="@drawable/ic_baseline_person_24"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/usernameTv"
-                android:text="Hello username"
-                />
+                android:gravity="center"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/settingProfileID"
-                android:src="@drawable/ic_baseline_settings_24"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/logout"
-                android:id="@+id/logoutBtn"/>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/profileImv"
+                    android:src="@drawable/ic_baseline_person_24"/>
+
+                <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/usernameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="Hello username"
+                        android:textSize="20dp" />
+
+                    <ImageView
+                        android:id="@+id/settingProfileID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/logoutBtn"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/usernameTv"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/ic_baseline_settings_24" />
+
+
+                    <Button
+                        android:id="@+id/logoutBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/textfield_bg"
+                        android:layout_centerVertical="true"
+                        android:text="@string/logout" />
+                </RelativeLayout>
+            </LinearLayout>
+
 
 
         <androidx.recyclerview.widget.RecyclerView

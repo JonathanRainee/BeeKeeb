@@ -16,14 +16,14 @@
         android:layout_marginBottom="25dp"
         android:text="@string/post_title"
         android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
 
 
     <EditText
         android:id="@+id/etTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
@@ -44,7 +44,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="25dp"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/etThread"
@@ -71,12 +71,12 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="25dp"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
 
     <Spinner
         android:id="@+id/spinTag"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTag"
         android:entries="@array/tag"
@@ -105,11 +105,11 @@
             android:layout_height="wrap_content"
             android:text="@string/image_or_video"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addImgBtn"
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="+"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +117,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/removeImgBtn"
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:text='x'
             app:layout_constraintLeft_toLeftOf="parent"
@@ -140,7 +140,7 @@
         android:id="@+id/btnAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
