@@ -144,24 +144,19 @@ class ProfileUserFragment : Fragment() {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                if(snapshot != null){
-                    val username = snapshot.data?.get("user_name").toString()
-                    val email = snapshot.data?.get("user_email").toString()
-                    val phoneNum = snapshot.data?.get("user_phone").toString()
-                    val birthdate = snapshot.data?.get("user_birthdate").toString()
-                    val profilePic = snapshot.data?.get("user_profile_picture").toString()
-                    val about = snapshot.data?.get("user_about").toString()
-                    following = snapshot.data?.get("following") as List<String>
-                    val uid = snapshot.data?.get("user_id").toString()
-                    currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
-                    usernameTV.setText("Hi, ${currUser.username}")
-                    if(currUser.profilePicture != ""){
-                        Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)
-                    }
-
+                val username = snapshot.data?.get("user_name").toString()
+                val email = snapshot.data?.get("user_email").toString()
+                val phoneNum = snapshot.data?.get("user_phone").toString()
+                val birthdate = snapshot.data?.get("user_birthdate").toString()
+                val profilePic = snapshot.data?.get("user_profile_picture").toString()
+                val about = snapshot.data?.get("user_about").toString()
+                following = snapshot.data?.get("following") as List<String>
+                val uid = snapshot.data?.get("user_id").toString()
+                currUser = User(username, about, email, phoneNum, birthdate, profilePic, following, uid)
+                usernameTV.setText("Hi, ${currUser.username}")
+                if(currUser.profilePicture != ""){
+                    Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)
                 }
-            } else {
-                Log.d("snapshot null", "Current data: null")
             }
         }
 

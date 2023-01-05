@@ -74,33 +74,37 @@ class UsersearchFragment : Fragment() {
 
                 val docs = path.get()
                 context?.let { Util.loadingDialog(it) }
-                docs.addOnSuccessListener { docs ->
-                    if (docs != null) {
-                        for(doc in docs){
-                            val username = doc.get("user_name").toString()
-                            val about = doc.get("user_about").toString()
-                            val email = doc.get("user_email").toString()
-                            val phone = doc.get("user_phone").toString()
-                            val birthdate = doc.get("user_birthdate").toString()
-                            val following = doc.get("following") as List<String>
-                            val uid = doc.get("user_id").toString()
-                            val profilePic = doc.get("user_profile_picture").toString()
-                            if(uid != currUserID){
-                                profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
-                                adapterProfile = ProfileAdapter(profileData)
-                                recyclerView.adapter = adapterProfile
-                                Util.dismissLoadingDialog()
-                                adapterProfile.onItemClicked = {
-                                    val intent = Intent(context, AnotherProfileActivity::class.java)
-                                    intent.putExtra("profileUID", it.id)
-                                    startActivity(intent)
+                docs.addOnCompleteListener { docs ->
+                    if (docs.isSuccessful) {
+                        val docs = docs.result
+                        if(docs != null && !docs.isEmpty) {
+                            for(doc in docs){
+                                val username = doc.get("user_name").toString()
+                                val about = doc.get("user_about").toString()
+                                val email = doc.get("user_email").toString()
+                                val phone = doc.get("user_phone").toString()
+                                val birthdate = doc.get("user_birthdate").toString()
+                                val following = doc.get("following") as List<String>
+                                val uid = doc.get("user_id").toString()
+                                val profilePic = doc.get("user_profile_picture").toString()
+                                if(uid != currUserID){
+                                    profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
+                                    adapterProfile = ProfileAdapter(profileData)
+                                    recyclerView.adapter = adapterProfile
+                                    Util.dismissLoadingDialog()
+                                    adapterProfile.onItemClicked = {
+                                        val intent = Intent(context, AnotherProfileActivity::class.java)
+                                        intent.putExtra("profileUID", it.id)
+                                        startActivity(intent)
+                                    }
                                 }
                             }
+                        }else{
+                            Log.d("masuk", "gk ketemu")
+                            Util.dismissLoadingDialog()
+                            Toast.makeText(context, R.string.userNotFound, Toast.LENGTH_SHORT).show()
                         }
                     }
-                }.addOnFailureListener {
-                    Util.dismissLoadingDialog()
-                    Toast.makeText(context, R.string.userNotFound, Toast.LENGTH_LONG).show()
                 }
             }
         }
