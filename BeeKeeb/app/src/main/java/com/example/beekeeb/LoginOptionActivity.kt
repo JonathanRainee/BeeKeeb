@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import edu.bluejack22_1.BeeKeeb.util.AlarmReceiver
 
 class LoginOptionActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class LoginOptionActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: AcitivityLoginoptionBinding
+    private val storage = FirebaseStorage.getInstance()
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,28 +107,59 @@ class LoginOptionActivity : AppCompatActivity() {
     private fun signInAttempt(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         val failMsg = R.string.google_auth_error
+        val phone = "0812".toInt()
+        val array = listOf("ihbuj")
+        val storagePath = "defaultPicture/defaultPicture.jpg"
 
         auth.signInWithCredential(credential).addOnCompleteListener{
             if(it.isSuccessful){
-                val uid = auth.currentUser?.uid.toString()
-                val data = hashMapOf(
-                    "user_id" to uid,
-                    "user_email" to account.email,
-                    "user_password" to "",
-                    "user_name" to account.displayName,
-                    "user_birthdate" to "",
-                    "user_profile_picture" to "",
-                    "user_about" to ""
-                )
-
-                db.collection("users").document(uid).set(data).addOnSuccessListener {
-                    this.finish()
-                    val intent = Intent(this, MainPageActivity::class.java)
-                    startActivity(intent)
-                }.addOnFailureListener{
-                        e-> Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+                storage.reference.child(storagePath).downloadUrl.addOnSuccessListener { url ->
+                    if (it.isSuccessful){
+                        val uid = auth.currentUser?.uid.toString()
+                        val data = hashMapOf(
+                            "user_id" to uid,
+                            "user_email" to account.email,
+                            "user_password" to "",
+                            "user_name" to account.displayName,
+                            "user_phone" to phone,
+                            "user_birthdate" to "",
+                            "user_profile_picture" to url.toString(),
+                            "user_about" to "",
+                            "following" to array,
+                            "followedBy" to array
+                        )
+                        db.collection("users").document(uid).set(data).addOnSuccessListener {
+                            this.finish()
+                            val intent = Intent(this, MainPageActivity::class.java)
+                            startActivity(intent)
+                        }.addOnFailureListener{
+                                e-> Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                        AlarmReceiver.sendNotification(this)
+                    }
                 }
-                AlarmReceiver.sendNotification(this)
+//                val uid = auth.currentUser?.uid.toString()
+//                val data = hashMapOf(
+//                    "user_id" to uid,
+//                    "user_email" to account.email,
+//                    "user_password" to "",
+//                    "user_name" to account.displayName,
+//                    "user_phone" to phone,
+//                    "user_birthdate" to "",
+//                    "user_profile_picture" to "",
+//                    "user_about" to "",
+//                    "following" to array,
+//                    "followedBy" to array
+//                )
+
+//                db.collection("users").document(uid).set(data).addOnSuccessListener {
+//                    this.finish()
+//                    val intent = Intent(this, MainPageActivity::class.java)
+//                    startActivity(intent)
+//                }.addOnFailureListener{
+//                        e-> Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//                AlarmReceiver.sendNotification(this)
             }else{
                 Toast.makeText(this, failMsg, Toast.LENGTH_SHORT).show()
             }

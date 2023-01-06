@@ -98,6 +98,7 @@ class ProfileUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileUserBinding.inflate(inflater, container, false)
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
@@ -144,6 +145,7 @@ class ProfileUserFragment : Fragment() {
             }
 
             if (snapshot != null && snapshot.exists()) {
+                postData.clear()
                 val username = snapshot.data?.get("user_name").toString()
                 val email = snapshot.data?.get("user_email").toString()
                 val phoneNum = snapshot.data?.get("user_phone").toString()
@@ -162,7 +164,7 @@ class ProfileUserFragment : Fragment() {
         }
 
         postRef.addSnapshotListener { value, e ->
-            postData.clear()
+//            postData.clear()
             if (e != null) {
                 return@addSnapshotListener
             }
@@ -175,9 +177,10 @@ class ProfileUserFragment : Fragment() {
                 val tag = doc.get("tag").toString();
                 val author = doc.get("author").toString();
                 val uid = doc.get("uid").toString()
+                Log.d("ini post",title+" "+thread+" "+path+" "+like+" "+tag+" "+author)
                 val docRef = db.collection("users").document(author)
                 docRef.addSnapshotListener { value, e ->
-                    postData.clear()
+//                    postData.clear()
                     if(value != null){
                         val authorID = value.id
                         val username = value.data?.get("user_name").toString()
