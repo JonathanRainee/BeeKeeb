@@ -49,6 +49,7 @@ class AnotherProfileActivity : AppCompatActivity() {
             if(e != null){
                 return@addSnapshotListener
             }
+
             if(value != null && value.exists()){
                 following = value.data?.get("following") as List<String>
 
@@ -101,9 +102,6 @@ class AnotherProfileActivity : AppCompatActivity() {
             userPath.update(update)
         }
 
-
-
-
         pathOther.get().addOnSuccessListener { doc ->
             val username = doc.get("user_name").toString()
             val profilePicture = doc.get("user_profile_picture").toString()
@@ -125,7 +123,6 @@ class AnotherProfileActivity : AppCompatActivity() {
             if(profilePicture != ""){
                 Picasso.get().load(profilePicture).fit().centerCrop().into(binding.profileImv)
             }
-//            set profile picture nya
 
             val postRef = db.collection("posts").orderBy("author").startAt(profileUID).endAt(profileUID+"\uf8ff")
             val docs = postRef.get()

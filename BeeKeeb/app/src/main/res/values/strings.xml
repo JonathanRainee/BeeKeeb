@@ -94,6 +94,8 @@
     <string name="credential_invalid">Credentials are invalid</string>
     <string name="userNotFound">User not found</string>
     <string name="postNotFound">Post not found</string>
+    <string name="email_used_error">The email address is already in use by another account.</string>
+    <string name="password_invalid">The given password is invalid. [ Password should be at least 6 characters ]</string>
 
 
     <!--    follow-->

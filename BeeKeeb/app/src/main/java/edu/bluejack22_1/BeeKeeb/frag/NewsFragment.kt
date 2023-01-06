@@ -85,7 +85,7 @@ class NewsFragment : Fragment() {
                     newsData.add(News(sender, senderImgProfile,receiver, newsFinal, postID))
                     adapterNews = NewsAdapter(newsData)
                     recyclerView.adapter = adapterNews
-                    Util.dismissLoadingDialog()
+//                    Util.dismissLoadingDialog()
                     adapterNews.onItemClicked = {
                         val intent = Intent(context, PostDetailActivity::class.java)
                         val postPath = db.collection("posts").document(it.postID)
@@ -99,6 +99,7 @@ class NewsFragment : Fragment() {
                     }
                 }
             }
+            Util.dismissLoadingDialog()
         }
 
         return binding.root

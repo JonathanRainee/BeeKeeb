@@ -111,9 +111,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-            Log.d("pressed", "set listener")
         binding.updateBtn.setOnClickListener{
-            Log.d("pressed", "fasdjf")
             val firstname = etFirstName.text.toString()
             val lastname = etLastName.text.toString()
             val username = firstname + " " + lastname
@@ -123,7 +121,6 @@ class ProfileFragment : Fragment() {
             val birthdate = month + "-" + day + "-" + year
             val phone = etPhone.text.toString()
             if(firstname != ""){
-                Log.d("if", "debug if")
                 reference.update(mapOf(
                     "user_name" to username,
                     "user_birthdate" to birthdate,
@@ -140,7 +137,6 @@ class ProfileFragment : Fragment() {
 
         }
 
-//        return profView
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 

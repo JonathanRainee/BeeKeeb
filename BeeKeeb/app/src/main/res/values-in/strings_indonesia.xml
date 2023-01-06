@@ -95,4 +95,6 @@
     <string name="credential_invalid">Kredential akun tidak valid</string>
     <string name="userNotFound">Pengguna tidak ditemukan</string>
     <string name="postNotFound">Unggahan tidak ditemukan</string>
+    <string name="email_used_error">Email telah digunakan oleh akun lain</string>
+    <string name="password_invalid">Kata kunci tidak valid. [ Harus lebih dari 6 huruf ]</string>
 </resources>

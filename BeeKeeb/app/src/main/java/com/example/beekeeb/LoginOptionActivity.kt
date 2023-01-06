@@ -45,6 +45,7 @@ class LoginOptionActivity : AppCompatActivity() {
         }
 
         binding.googleBtn.setOnClickListener{
+            Log.d("debug", "masuk ahh")
             signInGoogle()
         }
     }
@@ -57,6 +58,7 @@ class LoginOptionActivity : AppCompatActivity() {
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         result -> if(result.resultCode == Activity.RESULT_OK){
+            Log.d("Masuk", "masuk launcher ")
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             handleResults(task)
         }
@@ -67,6 +69,7 @@ class LoginOptionActivity : AppCompatActivity() {
         if(requestCode == 1001){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
+                Log.d("debug", "bug disini")
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
             }catch (e:ApiException){
@@ -79,7 +82,11 @@ class LoginOptionActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener(this){task->
             if(task.isSuccessful){
-
+                Log.d("success gmail", "Success gmail")
+                Toast.makeText(this, "Success login", Toast.LENGTH_SHORT).show()
+            }else{
+                Log.d("failed Gmail", "failed gmail")
+                Toast.makeText(this, "Failed login", Toast.LENGTH_SHORT).show()
             }
         }
     }

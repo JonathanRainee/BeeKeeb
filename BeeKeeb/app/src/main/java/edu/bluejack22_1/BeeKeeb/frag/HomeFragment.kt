@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
 
                 }
             }
-
+            Util.dismissLoadingDialog()
         }
 
 

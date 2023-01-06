@@ -102,7 +102,7 @@ class ProfileUserFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
         mGoogleSignInClient= context?.let { GoogleSignIn.getClient(it,gso) }!!
-        val reference = db.collection("users").document(userInstance.uid.toString())
+        val     reference = db.collection("users").document(userInstance.uid.toString())
         val postRef = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
 
         context?.let { Util.loadingDialog(it) }
@@ -157,10 +157,12 @@ class ProfileUserFragment : Fragment() {
                 if(currUser.profilePicture != ""){
                     Picasso.get().load(currUser.profilePicture).fit().centerCrop().into(profileImg)
                 }
+
             }
         }
 
         postRef.addSnapshotListener { value, e ->
+            postData.clear()
             if (e != null) {
                 return@addSnapshotListener
             }
@@ -174,15 +176,16 @@ class ProfileUserFragment : Fragment() {
                 val author = doc.get("author").toString();
                 val uid = doc.get("uid").toString()
                 val docRef = db.collection("users").document(author)
-                docRef.get().addOnSuccessListener { doc ->
-                    if(doc != null){
-                        val authorID = doc.id
-                        val username = doc.data?.get("user_name").toString()
-                        val profilePic = doc.data?.get("user_profile_picture").toString()
+                docRef.addSnapshotListener { value, e ->
+                    postData.clear()
+                    if(value != null){
+                        val authorID = value.id
+                        val username = value.data?.get("user_name").toString()
+                        val profilePic = value.data?.get("user_profile_picture").toString()
+
                         postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
                         adapterPost = postAdapter(postData)
                         recyclerView.adapter = adapterPost
-                        Util.dismissLoadingDialog()
                         adapterPost.onItemClicked = {
 
                             val intent = Intent(context, PostDetailActivity::class.java)
@@ -193,13 +196,10 @@ class ProfileUserFragment : Fragment() {
                     }else {
                         Log.d("doc not found", "No such document")
                     }
-
-                }.addOnFailureListener { e ->
-                    Log.d("Error Get User", e.toString())
                 }
 
             }
-
+            Util.dismissLoadingDialog()
         }
 
         return binding.root
@@ -216,6 +216,7 @@ class ProfileUserFragment : Fragment() {
     private var pickImgFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         val failMsg = R.string.database_error
         if (result.resultCode == Activity.RESULT_OK && result.data != null){
+            context?.let { Util.loadingDialog(it) }
             path = result.data!!.data!!
             val fileName = Util.getImageName(path.toString());
             val storagePath = currUser.email+"/profilePicture/$fileName"
@@ -226,7 +227,9 @@ class ProfileUserFragment : Fragment() {
                 }.addOnFailureListener {
                     Log.d("error", "error while getting download url ")
                 }
+                Util.dismissLoadingDialog()
             }.addOnFailureListener{
+                Util.dismissLoadingDialog()
                 Toast.makeText(context, failMsg, Toast.LENGTH_SHORT).show()
             }
         }

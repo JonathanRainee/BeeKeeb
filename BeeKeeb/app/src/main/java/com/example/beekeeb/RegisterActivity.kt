@@ -39,7 +39,9 @@ class RegisterActivity : AppCompatActivity() {
                 R.string.fields_error,
                 R.string.register_email_error,
                 R.string.database_error,
-                R.string.credential_invalid
+                R.string.credential_invalid,
+                R.string.email_used_error,
+                R.string.password_invalid,
             )
 
             if (email.isEmpty() || pass.isEmpty()){
@@ -75,14 +77,17 @@ class RegisterActivity : AppCompatActivity() {
                                         e-> Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
                                 }
 
-                        }else{
-                            Toast.makeText(this, errors[3], Toast.LENGTH_SHORT).show()
                         }
                     }.addOnFailureListener {
-                        Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
+                        when (it.localizedMessage) {
+                            "The email address is already in use by another account."
+                                -> Toast.makeText(this, errors[4], Toast.LENGTH_SHORT).show()
+                            "The given password is invalid. [ Password should be at least 6 characters ]"
+                                -> Toast.makeText(this, errors[5], Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }.addOnFailureListener {
-                    Log.d("error", "error while getting download url ")
+                    Toast.makeText(this, errors[2], Toast.LENGTH_SHORT).show()
                 }
 
             }
