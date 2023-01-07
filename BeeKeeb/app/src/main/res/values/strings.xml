@@ -54,7 +54,7 @@
     <string name="password_hint">Password</string>
     <string name="forgot_password">Forgot password ?</string>
     <string name="password_old_error">Password can\'t be the same as the old one</string>
-    <string name="fields_error">PLease fill all required fields</string>
+    <string name="fields_error">Please fill all required fields</string>
     <string name="success_change_pass">Password has successfully changed</string>
     <string name="wrong_credentials_error">Please enter the right credentials</string>
     <string name="google_auth_error">Failed to authenticate</string>
