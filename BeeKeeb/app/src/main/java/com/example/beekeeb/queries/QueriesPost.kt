@@ -2,9 +2,12 @@ package com.example.beekeeb.queries
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.example.beekeeb.model.CreatePost
+import com.example.beekeeb.model.Post
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 class QueriesPost {
 
@@ -33,13 +36,16 @@ class QueriesPost {
         }
 
         fun deletePost(postID: String, context: Context){
+            Util.loadingDialog(context)
             val db = Firebase.firestore
             val docref = db.collection("posts").document(postID).delete()
-//                .addOnSuccessListener {
-//                Toast.makeText(context, "Delete success", Toast.LENGTH_SHORT).show()
-//            }.addOnFailureListener({
-//                Toast.makeText(context, "Delete failed, please try again later", Toast.LENGTH_SHORT).show()
-//            })
+            docref.addOnSuccessListener {
+                Util.dismissLoadingDialog()
+                Toast.makeText(context, "Delete success", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener{
+                Util.dismissLoadingDialog()
+                Toast.makeText(context, "Delete failed, please try again later", Toast.LENGTH_SHORT).show()
+            }
 
         }
     }

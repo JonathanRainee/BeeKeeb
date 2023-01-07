@@ -40,14 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener{
             AlarmReceiver.sendNotification(this)
+            this.finish()
             val intentSignIn = Intent(this, LoginOptionActivity::class.java)
-            startActivityForResult(intentSignIn, 1)
+            startActivity(intentSignIn)
         }
 
         binding.btnRegister.setOnClickListener{
-            val intentSignIn = Intent(this, LoginOptionActivity::class.java)
             val intentRegis = Intent(this, RegisterActivity::class.java)
-            val intentRegister = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegis)
         }
     }

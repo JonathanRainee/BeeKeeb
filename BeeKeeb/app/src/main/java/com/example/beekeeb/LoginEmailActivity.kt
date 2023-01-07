@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.beekeeb.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import edu.bluejack22_1.BeeKeeb.util.AlarmReceiver
+import edu.bluejack22_1.BeeKeeb.util.Util
 
 class LoginEmailActivity : AppCompatActivity() {
 
@@ -38,11 +39,13 @@ class LoginEmailActivity : AppCompatActivity() {
             if(email.isEmpty() || pass.isEmpty()){
                 Toast.makeText(this, errors[0], Toast.LENGTH_SHORT).show()
             }else{
+                Util.loadingDialog(this)
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{
+                    Util.dismissLoadingDialog()
                     if(it.isSuccessful){
-                        this.finish()
                         finishActivity(1)
                         finishActivity(2)
+                        this.finish()
                         AlarmReceiver.sendNotification(this)
                         val intent = Intent(this, MainPageActivity::class.java)
                         startActivity(intent)

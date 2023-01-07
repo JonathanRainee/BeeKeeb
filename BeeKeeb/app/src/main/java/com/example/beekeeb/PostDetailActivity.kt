@@ -118,8 +118,8 @@ class PostDetailActivity : AppCompatActivity() {
         binding.deleteIV.setOnClickListener {
             QueriesPost.deletePost(postUID, this)
             this.finish()
-            val intent = Intent(this, MainPageActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainPageActivity::class.java)
+//            startActivity(intent)
         }
 
         binding.likeIV.setOnClickListener{

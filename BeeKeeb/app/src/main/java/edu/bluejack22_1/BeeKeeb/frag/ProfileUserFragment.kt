@@ -67,8 +67,6 @@ class ProfileUserFragment : Fragment() {
     private val userInstance = FirebaseAuth.getInstance()
     private lateinit var path: Uri
 
-    private val greetingsText = R.string.hello_greetings
-
     private lateinit var usernameTV: TextView
     private lateinit var profileImg: ImageView
     private lateinit var settingIV: ImageView
@@ -103,7 +101,7 @@ class ProfileUserFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
         mGoogleSignInClient= context?.let { GoogleSignIn.getClient(it,gso) }!!
-        val     reference = db.collection("users").document(userInstance.uid.toString())
+        val reference = db.collection("users").document(userInstance.uid.toString())
         val postRef = db.collection("posts").whereEqualTo("author", userInstance.uid.toString())
 
         context?.let { Util.loadingDialog(it) }
@@ -164,44 +162,46 @@ class ProfileUserFragment : Fragment() {
         }
 
         postRef.addSnapshotListener { value, e ->
-//            postData.clear()
+
             if (e != null) {
                 return@addSnapshotListener
             }
 
-            for (doc in value!!) {
-                val title = doc.get("title").toString();
-                val thread = doc.get("thread").toString();
-                val path = doc.get("path").toString();
-                val like = doc.get("like").toString().toInt();
-                val tag = doc.get("tag").toString();
-                val author = doc.get("author").toString();
-                val uid = doc.get("uid").toString()
-                Log.d("ini post",title+" "+thread+" "+path+" "+like+" "+tag+" "+author)
-                val docRef = db.collection("users").document(author)
-                docRef.addSnapshotListener { value, e ->
-//                    postData.clear()
-                    if(value != null){
-                        val authorID = value.id
-                        val username = value.data?.get("user_name").toString()
-                        val profilePic = value.data?.get("user_profile_picture").toString()
+            if(value != null && !value.isEmpty){
+                postData.clear()
+                for (doc in value!!) {
+                    val title = doc.get("title").toString();
+                    val thread = doc.get("thread").toString();
+                    val path = doc.get("path").toString();
+                    val like = doc.get("like").toString().toInt();
+                    val tag = doc.get("tag").toString();
+                    val author = doc.get("author").toString();
+                    val uid = doc.get("uid").toString()
+                    val docRef = db.collection("users").document(author)
+                    docRef.addSnapshotListener { value, e ->
+                        if(value != null && value.exists()){
+                            val authorID = value.id
+                            val username = value.data?.get("user_name").toString()
+                            val profilePic = value.data?.get("user_profile_picture").toString()
 
-                        postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
-                        adapterPost = postAdapter(postData)
-                        recyclerView.adapter = adapterPost
-                        adapterPost.onItemClicked = {
+                            postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
+                            adapterPost = postAdapter(postData)
+                            recyclerView.adapter = adapterPost
+                            adapterPost.onItemClicked = {
 
-                            val intent = Intent(context, PostDetailActivity::class.java)
-                            intent.putExtra("uid", it.uid)
-                            intent.putExtra("authorUID", it.authorUID)
-                            startActivity(intent)
+                                val intent = Intent(context, PostDetailActivity::class.java)
+                                intent.putExtra("uid", it.uid)
+                                intent.putExtra("authorUID", it.authorUID)
+                                startActivity(intent)
+                            }
+                        }else {
+//                            Log.d("doc not found", "No such document")
                         }
-                    }else {
-                        Log.d("doc not found", "No such document")
                     }
-                }
 
+                }
             }
+
             Util.dismissLoadingDialog()
         }
 

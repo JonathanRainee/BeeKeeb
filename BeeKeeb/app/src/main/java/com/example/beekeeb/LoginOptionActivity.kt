@@ -42,12 +42,12 @@ class LoginOptionActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         binding.btnEmail.setOnClickListener(){
+            this.finish()
             val intentEmail = Intent(this, LoginEmailActivity::class.java)
-            startActivityForResult(intentEmail, 2)
+            startActivity(intentEmail)
         }
 
         binding.googleBtn.setOnClickListener{
-            Log.d("debug", "masuk ahh")
             signInGoogle()
         }
     }
@@ -113,6 +113,7 @@ class LoginOptionActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential).addOnCompleteListener{
             if(it.isSuccessful){
+                this.finish()
                 storage.reference.child(storagePath).downloadUrl.addOnSuccessListener { url ->
                     if (it.isSuccessful){
                         val uid = auth.currentUser?.uid.toString()
