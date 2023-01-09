@@ -91,7 +91,6 @@ class UsersearchFragment : Fragment() {
                                     profileData.add(User(username, about, email, phone, birthdate, profilePic, following, uid))
                                     adapterProfile = ProfileAdapter(profileData)
                                     recyclerView.adapter = adapterProfile
-                                    Util.dismissLoadingDialog()
                                     adapterProfile.onItemClicked = {
                                         val intent = Intent(context, AnotherProfileActivity::class.java)
                                         intent.putExtra("profileUID", it.id)
@@ -99,6 +98,7 @@ class UsersearchFragment : Fragment() {
                                     }
                                 }
                             }
+                            Util.dismissLoadingDialog()
                         }else{
                             Log.d("masuk", "gk ketemu")
                             Util.dismissLoadingDialog()
