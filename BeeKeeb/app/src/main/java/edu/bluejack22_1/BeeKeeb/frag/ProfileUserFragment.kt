@@ -161,45 +161,45 @@ class ProfileUserFragment : Fragment() {
             }
         }
 
-        postRef.addSnapshotListener { value, e ->
+        postRef.addSnapshotListener { snapshot, e ->
+            postData.clear()
 
             if (e != null) {
                 return@addSnapshotListener
             }
 
-            if(value != null && !value.isEmpty){
-                postData.clear()
-                for (doc in value!!) {
+            if(snapshot != null && !snapshot.isEmpty){
+                for (doc in snapshot!!) {
                     val title = doc.get("title").toString();
                     val thread = doc.get("thread").toString();
                     val path = doc.get("path").toString();
                     val like = doc.get("like").toString().toInt();
                     val tag = doc.get("tag").toString();
                     val author = doc.get("author").toString();
-                    val uid = doc.get("uid").toString()
+                    val uid = doc.get("uid").toString();
+                    Log.d("title", title);
                     val docRef = db.collection("users").document(author)
                     docRef.addSnapshotListener { value, e ->
-                        if(value != null && value.exists()){
-                            val authorID = value.id
-                            val username = value.data?.get("user_name").toString()
-                            val profilePic = value.data?.get("user_profile_picture").toString()
+                        val authorID = value?.id.toString()
+                        val username = value?.data?.get("user_name").toString()
+                        val profilePic = value?.data?.get("user_profile_picture").toString()
 
-                            postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
-                            adapterPost = postAdapter(postData)
-                            recyclerView.adapter = adapterPost
-                            adapterPost.onItemClicked = {
+                        postData.add(Post(title, thread, tag, path, username, authorID, profilePic, like, uid))
+                        adapterPost = postAdapter(postData)
+                        recyclerView.adapter = adapterPost
+                        adapterPost.onItemClicked = {
 
-                                val intent = Intent(context, PostDetailActivity::class.java)
-                                intent.putExtra("uid", it.uid)
-                                intent.putExtra("authorUID", it.authorUID)
-                                startActivity(intent)
-                            }
-                        }else {
-//                            Log.d("doc not found", "No such document")
+                            val intent = Intent(context, PostDetailActivity::class.java)
+                            intent.putExtra("uid", it.uid)
+                            intent.putExtra("authorUID", it.authorUID)
+                            startActivity(intent)
                         }
                     }
 
                 }
+            }else{
+                adapterPost = postAdapter(postData)
+                recyclerView.adapter = adapterPost
             }
 
             Util.dismissLoadingDialog()
