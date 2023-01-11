@@ -198,6 +198,7 @@ class ProfileUserFragment : Fragment() {
 
                 }
             }else{
+                //test
                 adapterPost = postAdapter(postData)
                 recyclerView.adapter = adapterPost
             }
